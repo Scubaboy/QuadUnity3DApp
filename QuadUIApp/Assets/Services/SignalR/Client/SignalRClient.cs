@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using Assets.Services.SignalR.Models;
 
 namespace Assets.Services.SignalR.Client
 {
@@ -30,7 +31,7 @@ namespace Assets.Services.SignalR.Client
 
         private Dictionary<Type, string> hubMethodTypeMapping;
 
-        Dictionary<Type, string> clientMethodTypeMapping;
+        Dictionary<string, Type> clientMethodTypeMapping;
 
         private string hubName;
 
@@ -40,7 +41,7 @@ namespace Assets.Services.SignalR.Client
         /// <param name="hubMethodTypeMapping">List of hub methods to parameter type map.</param>
         /// <param name="clientMethods">List of client methods.</param>
         /// <param name="hubName">Attached hub name.</param>
-        public SignalRClient(Dictionary<Type,string> hubMethodTypeMapping, Dictionary<Type,string> clientMethodTypeMapping, string hubName)
+        public SignalRClient(Dictionary<Type,string> hubMethodTypeMapping, Dictionary<string, Type> clientMethodTypeMapping, string hubName)
         {
             this.hubMethodTypeMapping = hubMethodTypeMapping;
             this.clientMethodTypeMapping = clientMethodTypeMapping;
@@ -76,14 +77,23 @@ namespace Assets.Services.SignalR.Client
 
             if (msg.Contains(hubCheck))
             {
-                var deviceDataWrapper = JsonConvert.DeserializeObject<MessageWrapper>(e.Data).M[0];
-                _actionMap[deviceDataWrapper.M].Action(deviceDataWrapper.A[0]);
+                //Extract the client method content.
+                var clientMethodContent = HubToClientMsgParser.ParseHubToClientMsg(msg);
+
+                if (this.clientMethodTypeMapping.ContainsKey(clientMethodContent.ClientMethodName))
+                {
+                    var parameters = JsonConvert.DeserializeObject(clientMethodContent.ClientMethodParameters, this.clientMethodTypeMapping[clientMethodContent.ClientMethodName]);
+                    this.hubMethodCallBacks[clientMethodContent.ClientMethodName].ForEach(callback =>
+                    {
+                        callback.Action(parameters);
+                    });
+                }
             }
         }
 
         public void Register<T>(string methodName, Action<T> callback) where T : class
         {
-            if (this.clientMethodTypeMapping.Values.Contains(methodName))
+            if (this.clientMethodTypeMapping.ContainsKey(methodName))
             {
                 if (this.hubMethodCallBacks.ContainsKey(methodName))
                 {
