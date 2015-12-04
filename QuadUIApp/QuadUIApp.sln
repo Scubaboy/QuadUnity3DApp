@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuadUIApp.CSharp", "QuadUIApp.CSharp.csproj", "{AB55FD27-4546-44F5-2929-BF61305245B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuadUIApp.CSharp.Editor", "QuadUIApp.CSharp.Editor.csproj", "{BC6A880D-9E94-91CF-C7DD-1B4AEE7838D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{AB55FD27-4546-44F5-2929-BF61305245B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB55FD27-4546-44F5-2929-BF61305245B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB55FD27-4546-44F5-2929-BF61305245B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC6A880D-9E94-91CF-C7DD-1B4AEE7838D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC6A880D-9E94-91CF-C7DD-1B4AEE7838D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC6A880D-9E94-91CF-C7DD-1B4AEE7838D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC6A880D-9E94-91CF-C7DD-1B4AEE7838D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

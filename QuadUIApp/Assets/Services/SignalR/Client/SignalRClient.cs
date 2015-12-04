@@ -35,17 +35,28 @@ namespace Assets.Services.SignalR.Client
 
         private string hubName;
 
+        private ISignalRMsgParser hubToClientMsgParser;
+
+        private ISignalRClientParamToClass paramsToClass;
+
         /// <summary>
         /// Creates an instance of the SignalRClient.
         /// </summary>
         /// <param name="hubMethodTypeMapping">List of hub methods to parameter type map.</param>
         /// <param name="clientMethods">List of client methods.</param>
         /// <param name="hubName">Attached hub name.</param>
-        public SignalRClient(Dictionary<Type,string> hubMethodTypeMapping, Dictionary<string, Type> clientMethodTypeMapping, string hubName)
+        public SignalRClient(
+            ISignalRMsgParser hubToClientMsgParser,
+            ISignalRClientParamToClass paramsToClass,
+            Dictionary<Type,string> hubMethodTypeMapping, 
+            Dictionary<string, Type> clientMethodTypeMapping, 
+            string hubName)
         {
             this.hubMethodTypeMapping = hubMethodTypeMapping;
             this.clientMethodTypeMapping = clientMethodTypeMapping;
             this.hubName = hubName;
+            this.hubToClientMsgParser = hubToClientMsgParser;
+            this.paramsToClass = paramsToClass;
         }
 
         /// <summary>
@@ -78,11 +89,12 @@ namespace Assets.Services.SignalR.Client
             if (msg.Contains(hubCheck))
             {
                 //Extract the client method content.
-                var clientMethodContent = HubToClientMsgParser.ParseHubToClientMsg(msg);
+                var clientMethodContent = this.hubToClientMsgParser.ParseHubToClientMsg(msg);
 
                 if (this.clientMethodTypeMapping.ContainsKey(clientMethodContent.ClientMethodName))
                 {
-                    var parameters = JsonConvert.DeserializeObject(clientMethodContent.ClientMethodParameters, this.clientMethodTypeMapping[clientMethodContent.ClientMethodName]);
+                    var parameters = this.paramsToClass.Convert(clientMethodContent.ClientMethodParameters, this.clientMethodTypeMapping[clientMethodContent.ClientMethodName]);
+                        
                     this.hubMethodCallBacks[clientMethodContent.ClientMethodName].ForEach(callback =>
                     {
                         callback.Action(parameters);
@@ -122,7 +134,7 @@ namespace Assets.Services.SignalR.Client
             }
             else
             {
-                throw new SignalRClientMethodRegisterUnknownException();
+                //throw new SignalRClientMethodRegisterUnknownException();
             }
         }
 

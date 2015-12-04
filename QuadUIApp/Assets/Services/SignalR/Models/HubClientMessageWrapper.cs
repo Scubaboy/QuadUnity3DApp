@@ -3,7 +3,7 @@
     /// <summary>
     /// Defines the structure of a Signalr hub to client message.
     /// </summary>
-    internal class HubClientMessageWrapper
+    public class HubClientMessageWrapper
     {
         /// <summary>
         /// Initializes the class to empty results;

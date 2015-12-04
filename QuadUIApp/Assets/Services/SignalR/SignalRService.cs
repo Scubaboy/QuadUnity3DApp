@@ -66,7 +66,7 @@
         public void SendMessage(string name, string message)
         {
             //{"H":"chathub","M":"Send","A":["tester","hello"],"I":0}
-            var payload = new RollerBallWrapper()
+          /*  var payload = new RollerBallWrapper()
             {
                 H = "myhub",
                 M = "Send",
@@ -74,7 +74,7 @@
                 I = 12
             };
             var wsPacket = JsonConvert.SerializeObject(payload);
-            _ws.Send(wsPacket);
+            _ws.Send(wsPacket);*/
         }
     }
 }
