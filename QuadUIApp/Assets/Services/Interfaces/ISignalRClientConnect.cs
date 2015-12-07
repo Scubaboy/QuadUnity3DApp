@@ -13,7 +13,7 @@
         /// <typeparam name="T">Callback parameter type.</typeparam>
         /// <param name="methodName">SignalR client hub method name.</param>
         /// <param name="callback">Callback method to attach.</param>
-        void Register<T>(string methodName, Action<T> callback) where T : class;
+        void Register<T>(string methodName, ISignalRCallbackAction callback) where T : class;
 
         /// <summary>
         /// Sends a message to the server hub.

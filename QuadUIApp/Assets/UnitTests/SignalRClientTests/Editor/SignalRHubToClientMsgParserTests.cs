@@ -1,4 +1,4 @@
-﻿namespace Assets.UnitTests.SignalRClient.Editor
+﻿namespace Assets.UnitTests.SignalRClients.Editor
 {
     using Services.SignalR.MsgParser;
     using NUnit.Framework;

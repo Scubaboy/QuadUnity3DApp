@@ -103,7 +103,7 @@ namespace Assets.Services.SignalR.Client
             }
         }
 
-        public void Register<T>(string methodName, Action<T> callback) where T : class
+        public void Register<T>(string methodName, ISignalRCallbackAction callback) where T : class
         {
             if (this.clientMethodTypeMapping.ContainsKey(methodName))
             {
@@ -113,7 +113,7 @@ namespace Assets.Services.SignalR.Client
                     {
                         Action = new Action<object>(x =>
                         {
-                            callback(x as T);
+                            callback.Action(x as T);
                         })
                     });
                 }
@@ -125,7 +125,7 @@ namespace Assets.Services.SignalR.Client
                     {
                         Action = new Action<object>(x =>
                         {
-                            callback(x as T);
+                            callback.Action(x as T);
                         })
                     }
                 });

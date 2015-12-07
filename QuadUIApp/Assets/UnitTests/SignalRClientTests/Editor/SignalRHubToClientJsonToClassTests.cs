@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Assets.UnitTests.SignalRClient.Editor
+namespace Assets.UnitTests.SignalRClients.Editor
 {
     [TestFixture]
     internal class SignalRHubToClientJsonToClassTests
@@ -16,10 +16,13 @@ namespace Assets.UnitTests.SignalRClient.Editor
         {
             //Arrange
             var jsonMsgToClass = new MsgParamsToClass();
-            var paramString = "[\"activeQuad\"{\"QuadId\":\"1901\",\"SupportedComms\":\"0\",\"day\":\"30\"}]";
+            var paramString = "[{\"QuadId\":\"1901\",\"SupportedComms\":\"0\",\"SupportedIMU\":\"0\",\"SupportGPS\":\"0\",\"SupportedAlt\":\"0\",\"InUse\":\"False\"}]";
 
             //Act
             var theClass = jsonMsgToClass.Convert(paramString, typeof(ActiveQuad));
+            
+            //Asert
+            Assert.AreEqual(theClass.GetType(), typeof(ActiveQuad));
         }
     }
 }
