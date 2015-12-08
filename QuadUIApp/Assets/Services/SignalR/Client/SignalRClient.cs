@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using Assets.Services.SignalR.Models;
+using Assets.Exceptions.SignalRClientExceptions;
 
 namespace Assets.Services.SignalR.Client
 {
@@ -134,13 +135,29 @@ namespace Assets.Services.SignalR.Client
             }
             else
             {
-                //throw new SignalRClientMethodRegisterUnknownException();
+                throw new SignalRClientMethodRegisterUnknownException(string.Format("Method name {0} not supported by client", methodName));
             }
         }
 
         public void Send<T>(T msg) where T : class
         {
-            throw new NotImplementedException();
+            if (this.hubMethodTypeMapping.ContainsKey(msg.GetType()))
+            {
+                //Build the message
+                //{ "H":"chathub","M":"Send","A":["tester","hello"],"I":0}
+                this.msgSendQueue.Add(string.Format("{\"H\":\"{0}\",\"M\":\"{1}\":,\"A\":{2},\"I\":0}",
+                    this.hubName,
+                    this.hubMethodTypeMapping[msg.GetType()],
+                    msg.ToString()));
+            }
+            else
+            {
+                throw new SignalRClientUnSupportedSendMsgTypeException(
+                    string.Format(
+                        "Message type {0} not supported by client for hub {1}", 
+                        msg.GetType(),
+                        this.hubName));
+            }
         }
     }
 }
