@@ -10,13 +10,8 @@ namespace Assets.Services.SignalR.Controllers
 {
     class HubConnController : MonoBehaviour, ISignalRHubConnCtrl
     {
-        private Dictionary<ISignalRClient, ISignalRTransportCtrl> clientTransportMap;
+        protected Dictionary<ISignalRClient, ISignalRTransportCtrl> clientTransportMap;
 
-        public HubConnController()
-        {
-            this.clientTransportMap = new Dictionary<ISignalRClient, ISignalRTransportCtrl>();
-
-        }
         public bool ConnectToHub(ISignalRClient client, ISignalRTransportCtrl transProtocol)
         {
             var connResult = false;
@@ -67,17 +62,6 @@ namespace Assets.Services.SignalR.Controllers
             }
 
             return result;
-        }
-
-        public void Update()
-        {
-            if (this.clientTransportMap.Any())
-            {
-                foreach (var trans in this.clientTransportMap.Values)
-                {
-                    trans.Update();
-                }
-            }
         }
     }
 }

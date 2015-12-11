@@ -15,10 +15,6 @@ namespace Assets.Services.Interfaces
         void PostMessage(string msg, ISignalRClient client);
 
         bool RemoveClientFromHub(ISignalRClient client);
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        void Update();
+       
     }
 }

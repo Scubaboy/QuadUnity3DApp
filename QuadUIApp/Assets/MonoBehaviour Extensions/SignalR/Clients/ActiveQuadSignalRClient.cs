@@ -29,7 +29,7 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
 
             this.HubToClientMsgParser = new HubToClientMsgParser();
             this.ParamsToClass = new MsgParamsToClass();
-            this.HubConnectionParams = new HubConnectionParams("ActiveQuadHub", "myserer", false);
+            this.HubConnectionParams = new HubConnectionParams("ActiveQuadsHub", "localhost:8080", false);
 
             //Get the SignalR Client Controller.
             this.clientController = GameObject
