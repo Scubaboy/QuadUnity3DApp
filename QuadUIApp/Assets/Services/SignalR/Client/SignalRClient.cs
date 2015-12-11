@@ -6,18 +6,19 @@ using System.Text;
 using Newtonsoft.Json;
 using Assets.Services.SignalR.Models;
 using Assets.Exceptions.SignalRClientExceptions;
+using UnityEngine;
 
 namespace Assets.Services.SignalR.Client
 {
     /// <summary>
     /// Defines the structure of a SignalR Client;
     /// </summary>
-    public class SignalRClient : ISignalRClient, ISignalRClientConnect
+    public class SignalRClient : MonoBehaviour, ISignalRClient, ISignalRClientConnect
     {
-        class UnTypedActionContainer
+        protected class UnTypedActionContainer
         {
             public Type ActionType { get; set; }
-            public Action<Object> Action { get; set; }
+            public Action<System.Object> Action { get; set; }
         };
 
         /// <summary>
@@ -32,34 +33,14 @@ namespace Assets.Services.SignalR.Client
 
         private Dictionary<Type, string> hubMethodTypeMapping;
 
-        Dictionary<string, Type> clientMethodTypeMapping;
-
-        private string hubName;
+        private Dictionary<string, Type> clientMethodTypeMapping;
 
         private ISignalRMsgParser hubToClientMsgParser;
 
         private ISignalRClientParamToClass paramsToClass;
 
-        /// <summary>
-        /// Creates an instance of the SignalRClient.
-        /// </summary>
-        /// <param name="hubMethodTypeMapping">List of hub methods to parameter type map.</param>
-        /// <param name="clientMethods">List of client methods.</param>
-        /// <param name="hubName">Attached hub name.</param>
-        public SignalRClient(
-            ISignalRMsgParser hubToClientMsgParser,
-            ISignalRClientParamToClass paramsToClass,
-            Dictionary<Type,string> hubMethodTypeMapping, 
-            Dictionary<string, Type> clientMethodTypeMapping, 
-            string hubName)
-        {
-            this.hubMethodTypeMapping = hubMethodTypeMapping;
-            this.clientMethodTypeMapping = clientMethodTypeMapping;
-            this.hubName = hubName;
-            this.hubToClientMsgParser = hubToClientMsgParser;
-            this.paramsToClass = paramsToClass;
-        }
-
+        private HubConnectionParams hubConnectionParams;
+        
         /// <summary>
         /// Gets the attached hub name.
         /// </summary>
@@ -67,7 +48,69 @@ namespace Assets.Services.SignalR.Client
         {
             get
             {
-                return this.hubName;
+                return this.hubConnectionParams.HubName;
+            }
+        }
+
+        /// <summary>
+        /// Gets the SignalR host server url.
+        /// </summary>
+        public string HostServerUrl
+        {
+            get
+            {
+                return this.hubConnectionParams.HostServerUrl;
+            }
+        }
+
+        /// <summary>
+        /// Defines if a secure connection is to be used. 
+        /// </summary>
+        public bool UseSecureConnection
+        {
+            get
+            {
+                return this.hubConnectionParams.UseSecureConnection;
+            }
+        }
+
+        public Dictionary<Type, string> HubMethodTypeMapping
+        {
+            set
+            {
+                this.hubMethodTypeMapping = value;
+            }
+        }
+
+        public Dictionary<string, Type> ClientMethodTypeMapping
+        {
+            set
+            {
+                this.clientMethodTypeMapping = value;
+            }
+        }
+
+        public HubConnectionParams HubConnectionParams
+        {
+            set
+            {
+                this.hubConnectionParams = value;
+            }
+        }
+
+        public ISignalRClientParamToClass ParamsToClass
+        {
+            set
+            {
+                this.paramsToClass = value;
+            }
+        }
+
+        public ISignalRMsgParser HubToClientMsgParser
+        {
+            set
+            {
+                this.hubToClientMsgParser = value;
             }
         }
 
@@ -83,25 +126,29 @@ namespace Assets.Services.SignalR.Client
             return string.Empty;
         }
 
-        public void MsgRcved(string msg)
+        public void MsgRcved(List<ReceivedSignalRMsg> rcvedMsgs)
         {
-            var hubCheck = "\"H\":\"" + this.hubName + "\"";
+            var hubCheck = "\"H\":\"" + this.hubConnectionParams.HubName + "\"";
 
-            if (msg.Contains(hubCheck))
+            rcvedMsgs.ForEach(msg =>
             {
-                //Extract the client method content.
-                var clientMethodContent = this.hubToClientMsgParser.ParseHubToClientMsg(msg);
-
-                if (this.clientMethodTypeMapping.ContainsKey(clientMethodContent.ClientMethodName))
+                if (msg.Msg.Contains(hubCheck))
                 {
-                    var parameters = this.paramsToClass.Convert(clientMethodContent.ClientMethodParameters, this.clientMethodTypeMapping[clientMethodContent.ClientMethodName]);
-                        
-                    this.hubMethodCallBacks[clientMethodContent.ClientMethodName].ForEach(callback =>
+                    //Extract the client method content.
+                    var clientMethodContent = this.hubToClientMsgParser.ParseHubToClientMsg(msg.Msg);
+
+                    if (this.clientMethodTypeMapping.ContainsKey(clientMethodContent.ClientMethodName))
                     {
-                        callback.Action(parameters);
-                    });
+                        var parameters = this.paramsToClass.Convert(clientMethodContent.ClientMethodParameters, this.clientMethodTypeMapping[clientMethodContent.ClientMethodName]);
+
+                        this.hubMethodCallBacks[clientMethodContent.ClientMethodName].ForEach(callback =>
+                        {
+                            callback.Action(parameters);
+                        });
+                    }
                 }
-            }
+            });
+            
         }
 
         public void Register<T>(string methodName, ISignalRCallbackAction callback) where T : class
@@ -146,7 +193,7 @@ namespace Assets.Services.SignalR.Client
                 //Build the message
                 //{ "H":"chathub","M":"Send","A":["tester","hello"],"I":0}
                 this.msgSendQueue.Add(string.Format("{\"H\":\"{0}\",\"M\":\"{1}\":,\"A\":{2},\"I\":0}",
-                    this.hubName,
+                    this.hubConnectionParams.HubName,
                     this.hubMethodTypeMapping[msg.GetType()],
                     msg.ToString()));
             }
@@ -156,7 +203,7 @@ namespace Assets.Services.SignalR.Client
                     string.Format(
                         "Message type {0} not supported by client for hub {1}", 
                         msg.GetType(),
-                        this.hubName));
+                        this.hubConnectionParams.HubName));
             }
         }
     }

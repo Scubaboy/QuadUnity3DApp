@@ -9,8 +9,6 @@ namespace Assets.Services.Interfaces
     {
         bool RegisterClient(ISignalRClient client);
 
-        void Update();
-
         bool UnRegisterClient(ISignalRClient client);
     }
 }

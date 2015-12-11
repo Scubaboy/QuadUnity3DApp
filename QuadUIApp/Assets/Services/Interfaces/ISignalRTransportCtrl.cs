@@ -10,10 +10,15 @@ namespace Assets.Services.Interfaces
     {
         bool Connect();
 
-        bool Send(string msg);
+        void PostToSendQueue(string msg);
 
         List<ReceivedSignalRMsg> Read();
 
         void Close();
+
+        /// <summary>
+        /// Called each update cycle of the 3D engine.
+        /// </summary>
+        void Update();
     }
 }

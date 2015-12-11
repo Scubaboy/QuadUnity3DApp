@@ -1,12 +1,14 @@
 ﻿using Assets.Services.Interfaces;
+using Assets.Services.SignalR.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Assets.Services.SignalR.Controllers
 {
-    class HubConnController : ISignalRHubConnCtrl
+    class HubConnController : MonoBehaviour, ISignalRHubConnCtrl
     {
         private Dictionary<ISignalRClient, ISignalRTransportCtrl> clientTransportMap;
 
@@ -32,9 +34,9 @@ namespace Assets.Services.SignalR.Controllers
             return connResult;
         }
 
-        public List<string> GetMesssges(ISignalRClient client)
+        public List<ReceivedSignalRMsg> GetMesssges(ISignalRClient client)
         {
-            List<string> msg = null;
+            List<ReceivedSignalRMsg> msg = null;
 
             if (this.clientTransportMap.ContainsKey(client))
             {
@@ -48,7 +50,7 @@ namespace Assets.Services.SignalR.Controllers
         {
             if (this.clientTransportMap.ContainsKey(client))
             {
-                this.clientTransportMap[client].Send(msg);
+                this.clientTransportMap[client].PostToSendQueue(msg);
             }
         }
 
@@ -65,6 +67,17 @@ namespace Assets.Services.SignalR.Controllers
             }
 
             return result;
+        }
+
+        public void Update()
+        {
+            if (this.clientTransportMap.Any())
+            {
+                foreach (var trans in this.clientTransportMap.Values)
+                {
+                    trans.Update();
+                }
+            }
         }
     }
 }

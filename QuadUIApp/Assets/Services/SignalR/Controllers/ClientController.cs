@@ -1,34 +1,42 @@
-﻿using Assets.Services.Interfaces;
-using Assets.Services.SignalR.Transport;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Assets.Services.SignalR.Controllers
+﻿namespace Assets.Services.SignalR.Controllers
 {
-    public class ClientController : ISignalRClientController
+    using Interfaces;
+    using System.Collections.Generic;
+    using UnityEngine;
+
+    public class ClientController : MonoBehaviour, ISignalRClientController
     {
-        private ISignalRHubConnCtrl hubConnCtrl;
+        protected ISignalRHubConnCtrl hubConnCtrl;
+        protected List<ISignalRClient> registeredClients;
+        protected ISignalRTransportFactory transportFactory;
+        protected ProcessCycle processCycle;
 
-        private Dictionary<ISignalRClient, ISignalRTransportCtrl> registeredClients;
-
-        public ClientController(ISignalRHubConnCtrl hubConnCtrl)
+        /// <summary>
+        /// Processing cycle states.
+        /// </summary>
+        protected enum ProcessCycle
         {
-            this.hubConnCtrl = hubConnCtrl;
-            this.registeredClients = new Dictionary<ISignalRClient, ISignalRTransportCtrl>();
+            /// <summary>
+            /// Read messages from the clients transport protocol.
+            /// </summary>
+            Read,
+
+            /// <summary>
+            /// Send messages to the clients transport protocol.
+            /// </summary>
+            Send
         }
 
         public bool RegisterClient(ISignalRClient client)
         {
             var result = true;
 
-            if (!this.registeredClients.ContainsKey(client))
+            if (!this.registeredClients.Contains(client))
             {
-                var trans = new SignalRTransportWS(client,"https://www.mysignalr");
+                var trans = this.transportFactory.CreateWebSocketTransport(client.HubName, client.HostServerUrl, client.UseSecureConnection);
 
                 result = hubConnCtrl.ConnectToHub(client, trans);
-                this.registeredClients.Add(client,trans);
+                this.registeredClients.Add(client);
             }
 
             return result;
@@ -36,12 +44,17 @@ namespace Assets.Services.SignalR.Controllers
 
         public bool UnRegisterClient(ISignalRClient client)
         {
-            throw new NotImplementedException();
+            var result = true;
+
+            if (this.registeredClients.Contains(client))
+            {
+                this.hubConnCtrl.RemoveClientFromHub(client);
+                this.registeredClients.Remove(client);
+            }
+
+            return result;
         }
 
-        public void Update()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

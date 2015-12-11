@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.3f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,11 +51,17 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -78,27 +82,36 @@
   <ItemGroup>
     <Compile Include="Assets\Exceptions\SignalRClientExceptions\SignalRClientMethodRegisterUnknownException.cs" />
     <Compile Include="Assets\Exceptions\SignalRClientExceptions\SignalRClientUnsupportedSendMsgTypeException.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Clients\ActiveQuadSignalRClient.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRClientController.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRHubConnController.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Factories\Transport\Factory\SignalRTransportFactory.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRCallbackAction.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRClient.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRClientConnect.cs" />
+    <Compile Include="Assets\Services\Interfaces\ISignalRClientController.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRClientCtrl.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRClientParamToClass.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRClientController.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRHubConnCtrl.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRMsgParser.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRTransportCtrl.cs" />
+    <Compile Include="Assets\Services\Interfaces\ISignalRTransportFactory.cs" />
     <Compile Include="Assets\Services\SignalR\Client\SignalRClient.cs" />
     <Compile Include="Assets\Services\SignalR\Controllers\ClientController.cs" />
     <Compile Include="Assets\Services\SignalR\Controllers\HubConnController.cs" />
     <Compile Include="Assets\Services\SignalR\Models\ActiveQuad.cs" />
     <Compile Include="Assets\Services\SignalR\Models\HubClientMessageWrapper.cs" />
+    <Compile Include="Assets\Services\SignalR\Models\HubConnectionParams.cs" />
     <Compile Include="Assets\Services\SignalR\Models\NegotiateResponse.cs" />
+    <Compile Include="Assets\Services\SignalR\Models\PingResponse.cs" />
     <Compile Include="Assets\Services\SignalR\Models\ReceivedSignalRMsg.cs" />
     <Compile Include="Assets\Services\SignalR\Models\Types.cs" />
     <Compile Include="Assets\Services\SignalR\MsgParser\HubToClientMsgParser.cs" />
     <Compile Include="Assets\Services\SignalR\MsgToClass\MsgParamsToClass.cs" />
+    <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\Parsers\WebSocketParser.cs" />
+    <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\SignalRTransportWS.cs" />
+    <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\TransportProtocolTypes.cs" />
     <Compile Include="Assets\Services\SignalR\SignalRService.cs" />
-    <Compile Include="Assets\Services\SignalR\Transport\SignalRTransportWS.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />

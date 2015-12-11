@@ -51,16 +51,25 @@
                 {"ActiveQuad", typeof(ActiveQuad)}
             };
 
-            var signalRClient = new SignalRClient(
-                msgParser,
-                jsonMsgToClass, 
-                hubMethodTypeMapping, 
-                clientMethodTypeMapping, 
-                "ActiveQuadHub");
+            var signalRClient = new SignalRClient()
+            {
+                HubToClientMsgParser = msgParser,
+                ParamsToClass = jsonMsgToClass,
+                HubMethodTypeMapping = hubMethodTypeMapping,
+                ClientMethodTypeMapping = clientMethodTypeMapping,
+                HubConnectionParams = new HubConnectionParams("ActiveQuadHub", "myserer", false)
+
+            };
+               // msgParser,
+               // jsonMsgToClass, 
+               // hubMethodTypeMapping, 
+               // clientMethodTypeMapping, 
+               // new HubConnectionParams("ActiveQuadHub","myserer",false)
+               // );
 
             signalRClient.Register<ActiveQuad>("ActiveQuad",theCallback);
 
-            signalRClient.MsgRcved(hubToClientMsg);
+            signalRClient.MsgRcved(new List<ReceivedSignalRMsg> { new ReceivedSignalRMsg(DateTime.Now, hubToClientMsg) });
             theCallback.Received().Action<ActiveQuad>(Arg.Any<ActiveQuad>());
         }
     }
