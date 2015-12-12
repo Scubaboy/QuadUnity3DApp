@@ -91,17 +91,17 @@
 
         private void WebSocket_OnOpen(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void WebSocket_OnError(object sender, WebSocketSharp.ErrorEventArgs e)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(e.Message);
         }
 
         private void WebSocket_OnClose(object sender, CloseEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void WebSocket_OnMessage(object sender, MessageEventArgs e)
@@ -152,11 +152,12 @@
                 {
                     //Send ping test.
                     this.SendPingTest();
+                    this.lastUpdateTime = DateTime.Now;
                 }
 
                 this.SendPendingMsgs();
 
-                this.lastUpdateTime = DateTime.Now;
+                
             }
         }
 

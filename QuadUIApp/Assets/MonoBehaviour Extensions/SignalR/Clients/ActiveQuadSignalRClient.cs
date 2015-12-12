@@ -21,7 +21,11 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
         /// </summary>
         void Awake()
         {
-            this.HubMethodTypeMapping = new Dictionary<Type, string> { };
+            this.HubMethodTypeMapping = new Dictionary<Type, string>
+            {
+                {typeof(ActiveQuad), "UpdateQuad" }
+            };
+
             this.ClientMethodTypeMapping = new Dictionary<string, Type>
             {
                 {"ActiveQuad", typeof(ActiveQuad)}
@@ -41,6 +45,9 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
         {
             //Register the client with the client controller.
             this.clientController.RegisterClient(this);
+
+            //Test message send
+            this.Send<ActiveQuad>(new ActiveQuad() { QuadId = "ff" });
         }
 
     }

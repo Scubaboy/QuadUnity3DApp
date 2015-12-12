@@ -29,7 +29,7 @@ namespace Assets.Services.SignalR.Client
         /// <summary>
         /// Client to hub message send queue.
         /// </summary>
-        private List<string> msgSendQueue;
+        private List<string> msgSendQueue = new List<string>();
 
         private Dictionary<Type, string> hubMethodTypeMapping;
 
@@ -192,10 +192,12 @@ namespace Assets.Services.SignalR.Client
             {
                 //Build the message
                 //{ "H":"chathub","M":"Send","A":["tester","hello"],"I":0}
-                this.msgSendQueue.Add(string.Format("{\"H\":\"{0}\",\"M\":\"{1}\":,\"A\":{2},\"I\":0}",
+                var intermsg = string.Format("\"H\":\"{0}\",\"M\":\"{1}\",\"A\":[{2}],\"I\":0",
                     this.hubConnectionParams.HubName,
                     this.hubMethodTypeMapping[msg.GetType()],
-                    msg.ToString()));
+                    msg.ToString());
+
+                this.msgSendQueue.Add("{" + intermsg +"}");
             }
             else
             {
