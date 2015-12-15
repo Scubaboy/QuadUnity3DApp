@@ -7,6 +7,6 @@ namespace Assets.Services.Interfaces
 {
     public interface ISignalRCallbackAction
     {
-        void Action<T>(T param);
+        T Func<T>(T param);
     }
 }

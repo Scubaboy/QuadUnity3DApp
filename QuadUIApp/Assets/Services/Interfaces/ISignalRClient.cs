@@ -36,6 +36,7 @@
         /// <returns>Message to post.</returns>
         string GetNextMsgToSend();
 
+
         /// <summary>
         /// 
         /// </summary>

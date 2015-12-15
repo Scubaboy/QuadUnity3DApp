@@ -15,6 +15,9 @@ namespace Assets.Services.SignalR.Client
     /// </summary>
     public class SignalRClient : MonoBehaviour, ISignalRClient, ISignalRClientConnect
     {
+        /// <summary>
+        /// 
+        /// </summary>
         protected class UnTypedActionContainer
         {
             public Type ActionType { get; set; }
@@ -151,7 +154,7 @@ namespace Assets.Services.SignalR.Client
             
         }
 
-        public void Register<T>(string methodName, ISignalRCallbackAction callback) where T : class
+        public void Register<T>(string methodName, Action<T> callback) where T : class
         {
             if (this.clientMethodTypeMapping.ContainsKey(methodName))
             {
@@ -161,7 +164,7 @@ namespace Assets.Services.SignalR.Client
                     {
                         Action = new Action<object>(x =>
                         {
-                            callback.Action(x as T);
+                            callback(x as T);
                         })
                     });
                 }
@@ -173,7 +176,7 @@ namespace Assets.Services.SignalR.Client
                     {
                         Action = new Action<object>(x =>
                         {
-                            callback.Action(x as T);
+                            callback(x as T);
                         })
                     }
                 });

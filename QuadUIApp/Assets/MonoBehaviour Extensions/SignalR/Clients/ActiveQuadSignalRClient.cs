@@ -1,4 +1,5 @@
 ﻿using Assets.MonoBehaviour_Extensions.SignalR.Controllers;
+using Assets.MonoBehaviour_Extensions.SignalR.Interfaces.SignalRClientContainers;
 using Assets.Services.Interfaces;
 using Assets.Services.SignalR.Client;
 using Assets.Services.SignalR.Models;
@@ -9,12 +10,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Assets.MonoBehaviour_Extensions.SignalR.Container_Events.ActiveQuadContainer;
 
 namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
 {
-    public class ActiveQuadSignalRClient : SignalRClient
+    public class ActiveQuadSignalRClient : SignalRClient, ISignalRActiveQuadContainer
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private ISignalRClientController clientController;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public event ActiveQuadsUpdateEventHandler ActiveQuads;
 
         /// <summary>
         /// Setup the clients configuration.
@@ -28,7 +38,8 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
 
             this.ClientMethodTypeMapping = new Dictionary<string, Type>
             {
-                {"ActiveQuad", typeof(ActiveQuad)}
+                { "ActiveQuad", typeof(ActiveQuad)},
+                { "ActiveQuads", typeof(List<ActiveQuad>)}
             };
 
             this.HubToClientMsgParser = new HubToClientMsgParser();
@@ -39,6 +50,18 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
             this.clientController = GameObject
                 .FindObjectOfType<SignalRClientController>()
                 .GetComponent<SignalRClientController>() as ISignalRClientController;
+
+            //Regsiter SignalRlient Container callback
+            this.Register<List<ActiveQuad>>("ActiveQuads", this.ActiveQuadsCallback);
+        }
+
+        /// <summary>
+        /// Maintains a list of all connected quads.
+        /// </summary>
+        /// <param name="activeQuads"></param>
+        private void ActiveQuadsCallback(List<ActiveQuad> activeQuads)
+        {
+            this.OnActiveQuadUpdate(new ActiveQuadsUpdateEventArgs(activeQuads));
         }
 
         void Start()
@@ -48,6 +71,20 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
 
             //Test message send
             this.Send<ActiveQuad>(new ActiveQuad() { QuadId = "ff" });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        protected virtual void OnActiveQuadUpdate(ActiveQuadsUpdateEventArgs args)
+        {
+            ActiveQuadsUpdateEventHandler activeQuadHandler = this.ActiveQuads;
+
+            if (activeQuadHandler != null)
+            {
+                activeQuadHandler(this, args);
+            }
         }
 
     }

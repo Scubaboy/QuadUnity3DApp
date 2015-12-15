@@ -18,7 +18,7 @@
         {
             var hubToClientMsg = "{\"C\":\"B,6 | O,0 | P,0 | Q,0\",\"M\":[{\"H\":\"ActiveQuadHub\",\"M\":\"clientMethodUpdate\",\"A\":[\"Param1\",\"Param2\"]}]}";
             var jsonMsgToClass = Substitute.For<ISignalRClientParamToClass>();
-            var theCallback = Substitute.For<ISignalRCallbackAction>();
+            var theCallback = Substitute.For<Action<ActiveQuad>>();
             jsonMsgToClass.Convert(Arg.Any<string>(), Arg.Any<Type>()).Returns(x =>
             {
                 return new ActiveQuad()
@@ -70,7 +70,7 @@
             signalRClient.Register<ActiveQuad>("ActiveQuad",theCallback);
 
             signalRClient.MsgRcved(new List<ReceivedSignalRMsg> { new ReceivedSignalRMsg(DateTime.Now, hubToClientMsg) });
-            theCallback.Received().Action<ActiveQuad>(Arg.Any<ActiveQuad>());
+            theCallback.Received()(Arg.Any<ActiveQuad>());
         }
     }
 }

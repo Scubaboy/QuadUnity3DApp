@@ -57,6 +57,12 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -77,6 +83,8 @@
     <Compile Include="Assets\Exceptions\SignalRClientExceptions\SignalRClientMethodRegisterUnknownException.cs" />
     <Compile Include="Assets\Exceptions\SignalRClientExceptions\SignalRClientUnsupportedSendMsgTypeException.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Clients\ActiveQuadSignalRClient.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container Events\ActiveQuadContainer\ActiveQuadsUpdateEventArgs.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container Interfaces\SignalRClientContainers\ISignalRActiveQuadContainer.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRClientController.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRHubConnController.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Factories\Transport\Factory\SignalRTransportFactory.cs" />
