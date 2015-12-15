@@ -38,7 +38,7 @@
             //Extract the client method parameters.
             if (clientMethodParametersSplit[0].Contains("\"A\""))
             {
-                parsedMsg.ClientMethodParameters = '['+ clientMethodParametersSplit[1] + ']';
+                parsedMsg.ClientMethodParameters = '['+ clientMethodParametersSplit[1] + "}]";
             }
 
             if (parsedMsg.Hubname == string.Empty || parsedMsg.ClientMethodName == string.Empty || parsedMsg.ClientMethodParameters == string.Empty)

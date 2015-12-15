@@ -39,7 +39,7 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
             this.ClientMethodTypeMapping = new Dictionary<string, Type>
             {
                 { "ActiveQuad", typeof(ActiveQuad)},
-                { "ActiveQuads", typeof(List<ActiveQuad>)}
+                { "ActiveQuads", typeof(ActiveQuads)}
             };
 
             this.HubToClientMsgParser = new HubToClientMsgParser();
@@ -52,16 +52,16 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
                 .GetComponent<SignalRClientController>() as ISignalRClientController;
 
             //Regsiter SignalRlient Container callback
-            this.Register<List<ActiveQuad>>("ActiveQuads", this.ActiveQuadsCallback);
+            this.Register<ActiveQuads>("ActiveQuads", this.ActiveQuadsCallback);
         }
 
         /// <summary>
         /// Maintains a list of all connected quads.
         /// </summary>
         /// <param name="activeQuads"></param>
-        private void ActiveQuadsCallback(List<ActiveQuad> activeQuads)
+        private void ActiveQuadsCallback(ActiveQuads activeQuads)
         {
-            this.OnActiveQuadUpdate(new ActiveQuadsUpdateEventArgs(activeQuads));
+            this.OnActiveQuadUpdate(new ActiveQuadsUpdateEventArgs(activeQuads.Quads));
         }
 
         void Start()
