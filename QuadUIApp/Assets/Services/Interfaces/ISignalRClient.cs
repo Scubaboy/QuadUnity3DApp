@@ -48,22 +48,12 @@
         /// <summary>
         /// 
         /// </summary>
-        Dictionary<string, Type> ClientMethodTypeMapping
+        Dictionary<string, ISignalRMsgParserJson> ClientMethodTypeMapping
         {
             set;
         }
 
         HubConnectionParams HubConnectionParams
-        {
-            set;
-        }
-
-        ISignalRClientParamToClass ParamsToClass
-        {
-            set;
-        }
-
-        ISignalRMsgParserString HubToClientMsgParser
         {
             set;
         }

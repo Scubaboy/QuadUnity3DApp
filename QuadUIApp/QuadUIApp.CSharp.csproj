@@ -113,10 +113,10 @@
     <Compile Include="Assets\Services\SignalR\Models\ReceivedSignalRMsg.cs" />
     <Compile Include="Assets\Services\SignalR\Models\Types.cs" />
     <Compile Include="Assets\Services\SignalR\MsgParser\HubToClientMsgParser.cs" />
-    <Compile Include="Assets\Services\SignalR\MsgParser\jsonParser\Base.cs" />
     <Compile Include="Assets\Services\SignalR\MsgParser\jsonParser\HubMessageClientWrapper.cs" />
     <Compile Include="Assets\Services\SignalR\MsgParser\jsonParser\HubMessageWrapper.cs" />
     <Compile Include="Assets\Services\SignalR\MsgParser\jsonParser\HubToClientMsgParserJson.cs" />
+    <Compile Include="Assets\Services\SignalR\MsgParser\RawMsgHelper.cs" />
     <Compile Include="Assets\Services\SignalR\MsgToClass\MsgParamsToClass.cs" />
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\Parsers\WebSocketParser.cs" />
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\SignalRTransportWS.cs" />

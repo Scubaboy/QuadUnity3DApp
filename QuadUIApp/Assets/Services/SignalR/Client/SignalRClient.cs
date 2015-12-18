@@ -9,6 +9,7 @@ using Assets.Exceptions.SignalRClientExceptions;
 using UnityEngine;
 using Assets.Services.SignalR.MsgParser.jsonParser;
 using Assets.Services.SignalR.MsgParser.JsonParser;
+using Assets.Services.SignalR.MsgParser;
 
 namespace Assets.Services.SignalR.Client
 {
@@ -51,12 +52,7 @@ namespace Assets.Services.SignalR.Client
         /// <summary>
         /// 
         /// </summary>
-        private ISignalRMsgParserString hubToClientMsgParser;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private ISignalRClientParamToClass paramsToClass;
+        private ISignalRMsgParserJson hubToClientMsgParser;
 
         /// <summary>
         /// 
@@ -120,22 +116,6 @@ namespace Assets.Services.SignalR.Client
             }
         }
 
-        public ISignalRClientParamToClass ParamsToClass
-        {
-            set
-            {
-                this.paramsToClass = value;
-            }
-        }
-
-        public ISignalRMsgParserString HubToClientMsgParser
-        {
-            set
-            {
-                this.hubToClientMsgParser = value;
-            }
-        }
-
         public string GetNextMsgToSend()
         {
             if (this.msgSendQueue.Any())
@@ -147,26 +127,34 @@ namespace Assets.Services.SignalR.Client
 
             return string.Empty;
         }
-
+        
         public void MsgRcved(List<ReceivedSignalRMsg> rcvedMsgs)
         {
-            var hubCheck = "\"H\":\"" + this.hubConnectionParams.HubName + "\"";
-
             rcvedMsgs.ForEach(msg =>
             {
-                if (msg.Msg.Contains(hubCheck))
+                if (msg.Msg.ContainsHubName(this.hubConnectionParams.HubName))
                 {
-                    //Extract the client method content.
-                    var clientMethodContent = this.hubToClientMsgParser.ParseHubToClientMsg(msg.Msg);
+                    //Try and extract the method name
+                    var methodName = msg.Msg.GetMethodName();
 
-                    if (this.clientMethodTypeMapping.ContainsKey(clientMethodContent.ClientMethodName))
+                    if (methodName != string.Empty)
                     {
-                        var parameters = this.paramsToClass.Convert(clientMethodContent.ClientMethodParameters, this.clientMethodTypeMapping[clientMethodContent.ClientMethodName]);
-
-                        this.hubMethodCallBacks[clientMethodContent.ClientMethodName].ForEach(callback =>
+                        //Extract the msg parser if one has been defined.
+                        if (this.clientMethodTypeMapping.ContainsKey(methodName))
                         {
-                            callback.Action(parameters);
-                        });
+
+                            //Extract the client method content.
+                            this.clientMethodTypeMapping[methodName].ParseHubToClientMsg(msg.Msg);
+
+
+                            //var parameters = this.paramsToClass.Convert(clientMethodContent.ClientMethodParameters, this.clientMethodTypeMapping[clientMethodContent.ClientMethodName]);
+
+                            this.hubMethodCallBacks[methodName].ForEach(callback =>
+                            {
+                                callback.Action(this.clientMethodTypeMapping[methodName].Parameters);
+                            });
+
+                        }
                     }
                 }
             });

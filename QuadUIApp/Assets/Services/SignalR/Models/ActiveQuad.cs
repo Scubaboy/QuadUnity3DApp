@@ -13,6 +13,7 @@ namespace Assets.Services.SignalR.Models
             return JsonConvert.SerializeObject(this);
         }
 
+        public int Id { get; set; }
         public string QuadId { get; set; }
         public CommsOptions SupportedComms { get; set; }
         public IMUOpions SupportedIMU { get; set; }

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Assets.MonoBehaviour_Extensions.SignalR.Container_Events.ActiveQuadContainer;
+using Assets.Services.SignalR.MsgParser.JsonParser;
 
 namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
 {
@@ -36,32 +37,30 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
                 {typeof(ActiveQuad), "UpdateQuad" }
             };
 
-            this.ClientMethodTypeMapping = new Dictionary<string, Type>
+            this.ClientMethodTypeMapping = new Dictionary<string, ISignalRMsgParserJson>
             {
-                { "ActiveQuad", typeof(ActiveQuad)},
-                { "ActiveQuads", typeof(ActiveQuads)}
+                { "ActiveQuads", new HubToClientMsgParserJson<List<ActiveQuad>>()}
             };
 
-            this.HubToClientMsgParser = new HubToClientMsgParser();
-            this.ParamsToClass = new MsgParamsToClass();
+         //   this.ParamsToClass = new MsgParamsToClass();
             this.HubConnectionParams = new HubConnectionParams("ActiveQuadsHub", "localhost:8080", false);
 
             //Get the SignalR Client Controller.
             this.clientController = GameObject
                 .FindObjectOfType<SignalRClientController>()
                 .GetComponent<SignalRClientController>() as ISignalRClientController;
-
+            
             //Regsiter SignalRlient Container callback
-            this.Register<ActiveQuads>("ActiveQuads", this.ActiveQuadsCallback);
+            this.Register<List<ActiveQuad>>("ActiveQuads", this.ActiveQuadsCallback);
         }
 
         /// <summary>
         /// Maintains a list of all connected quads.
         /// </summary>
         /// <param name="activeQuads"></param>
-        private void ActiveQuadsCallback(ActiveQuads activeQuads)
+        private void ActiveQuadsCallback(List<ActiveQuad> activeQuads)
         {
-            this.OnActiveQuadUpdate(new ActiveQuadsUpdateEventArgs(activeQuads.Quads));
+            this.OnActiveQuadUpdate(new ActiveQuadsUpdateEventArgs(activeQuads));
         }
 
         void Start()
