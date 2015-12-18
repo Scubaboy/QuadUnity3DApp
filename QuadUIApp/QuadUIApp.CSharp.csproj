@@ -59,6 +59,12 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -91,7 +97,8 @@
     <Compile Include="Assets\Services\Interfaces\ISignalRClientCtrl.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRClientParamToClass.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRHubConnCtrl.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRMsgParser.cs" />
+    <Compile Include="Assets\Services\Interfaces\ISignalRMsgParserJson.cs" />
+    <Compile Include="Assets\Services\Interfaces\ISignalRMsgParserString.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRTransportCtrl.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRTransportFactory.cs" />
     <Compile Include="Assets\Services\SignalR\Client\SignalRClient.cs" />
@@ -106,6 +113,10 @@
     <Compile Include="Assets\Services\SignalR\Models\ReceivedSignalRMsg.cs" />
     <Compile Include="Assets\Services\SignalR\Models\Types.cs" />
     <Compile Include="Assets\Services\SignalR\MsgParser\HubToClientMsgParser.cs" />
+    <Compile Include="Assets\Services\SignalR\MsgParser\jsonParser\Base.cs" />
+    <Compile Include="Assets\Services\SignalR\MsgParser\jsonParser\HubMessageClientWrapper.cs" />
+    <Compile Include="Assets\Services\SignalR\MsgParser\jsonParser\HubMessageWrapper.cs" />
+    <Compile Include="Assets\Services\SignalR\MsgParser\jsonParser\HubToClientMsgParserJson.cs" />
     <Compile Include="Assets\Services\SignalR\MsgToClass\MsgParamsToClass.cs" />
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\Parsers\WebSocketParser.cs" />
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\SignalRTransportWS.cs" />

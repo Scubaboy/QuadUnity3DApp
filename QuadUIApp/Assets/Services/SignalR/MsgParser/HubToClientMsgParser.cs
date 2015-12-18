@@ -4,7 +4,7 @@
     using System.Linq;
     using Models;
 
-    public class HubToClientMsgParser : ISignalRMsgParser
+    public class HubToClientMsgParser : ISignalRMsgParserString
     {
         public HubClientMessageWrapper ParseHubToClientMsg(string hubMsg)
         {

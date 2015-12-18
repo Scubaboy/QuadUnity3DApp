@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Assets.Services.Interfaces
 {
-    public interface ISignalRMsgParser
+    public interface ISignalRMsgParserString
     {
         HubClientMessageWrapper ParseHubToClientMsg(string hubMsg);
     }

@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using Assets.Services.SignalR.Models;
 using Assets.Exceptions.SignalRClientExceptions;
 using UnityEngine;
+using Assets.Services.SignalR.MsgParser.jsonParser;
+using Assets.Services.SignalR.MsgParser.JsonParser;
 
 namespace Assets.Services.SignalR.Client
 {
@@ -34,14 +36,31 @@ namespace Assets.Services.SignalR.Client
         /// </summary>
         private List<string> msgSendQueue = new List<string>();
 
+        /// <summary>
+        /// 
+        /// </summary>
         private Dictionary<Type, string> hubMethodTypeMapping;
 
-        private Dictionary<string, Type> clientMethodTypeMapping;
+        /// <summary>
+        /// 
+        /// </summary>
+       // private Dictionary<string, Type> clientMethodTypeMapping;
 
-        private ISignalRMsgParser hubToClientMsgParser;
+        private Dictionary<string, ISignalRMsgParserJson> clientMethodTypeMapping;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private ISignalRMsgParserString hubToClientMsgParser;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private ISignalRClientParamToClass paramsToClass;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private HubConnectionParams hubConnectionParams;
         
         /// <summary>
@@ -85,7 +104,7 @@ namespace Assets.Services.SignalR.Client
             }
         }
 
-        public Dictionary<string, Type> ClientMethodTypeMapping
+        public Dictionary<string, ISignalRMsgParserJson> ClientMethodTypeMapping
         {
             set
             {
@@ -109,7 +128,7 @@ namespace Assets.Services.SignalR.Client
             }
         }
 
-        public ISignalRMsgParser HubToClientMsgParser
+        public ISignalRMsgParserString HubToClientMsgParser
         {
             set
             {
@@ -156,6 +175,8 @@ namespace Assets.Services.SignalR.Client
 
         public void Register<T>(string methodName, Action<T> callback) where T : class
         {
+            var test = new HubToClientMsgParserJson<T>();
+
             if (this.clientMethodTypeMapping.ContainsKey(methodName))
             {
                 if (this.hubMethodCallBacks.ContainsKey(methodName))

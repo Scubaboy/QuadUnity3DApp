@@ -63,7 +63,7 @@
             set;
         }
 
-        ISignalRMsgParser HubToClientMsgParser
+        ISignalRMsgParserString HubToClientMsgParser
         {
             set;
         }

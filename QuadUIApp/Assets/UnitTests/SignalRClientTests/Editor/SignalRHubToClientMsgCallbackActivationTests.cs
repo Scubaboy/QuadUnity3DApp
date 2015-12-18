@@ -34,7 +34,7 @@
             });
 
             //ISignalRMsgParser
-            var msgParser = Substitute.For<ISignalRMsgParser>();
+            var msgParser = Substitute.For<ISignalRMsgParserString>();
             msgParser.ParseHubToClientMsg(Arg.Any<string>()).Returns( x =>
                 {
                     return new HubClientMessageWrapper
