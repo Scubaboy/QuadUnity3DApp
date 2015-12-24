@@ -59,12 +59,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -101,6 +95,9 @@
     <Compile Include="Assets\Services\Interfaces\ISignalRMsgParserString.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRTransportCtrl.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRTransportFactory.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeController.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTransition.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Types.cs" />
     <Compile Include="Assets\Services\SignalR\Client\SignalRClient.cs" />
     <Compile Include="Assets\Services\SignalR\Controllers\ClientController.cs" />
     <Compile Include="Assets\Services\SignalR\Controllers\HubConnController.cs" />
@@ -113,15 +110,17 @@
     <Compile Include="Assets\Services\SignalR\Models\ReceivedSignalRMsg.cs" />
     <Compile Include="Assets\Services\SignalR\Models\Types.cs" />
     <Compile Include="Assets\Services\SignalR\MsgParser\HubToClientMsgParser.cs" />
+    <Compile Include="Assets\Services\SignalR\MsgParser\RawMsgHelper.cs" />
     <Compile Include="Assets\Services\SignalR\MsgParser\jsonParser\HubMessageClientWrapper.cs" />
     <Compile Include="Assets\Services\SignalR\MsgParser\jsonParser\HubMessageWrapper.cs" />
     <Compile Include="Assets\Services\SignalR\MsgParser\jsonParser\HubToClientMsgParserJson.cs" />
-    <Compile Include="Assets\Services\SignalR\MsgParser\RawMsgHelper.cs" />
     <Compile Include="Assets\Services\SignalR\MsgToClass\MsgParamsToClass.cs" />
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\Parsers\WebSocketParser.cs" />
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\SignalRTransportWS.cs" />
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\TransportProtocolTypes.cs" />
     <Compile Include="Assets\Services\SignalR\SignalRService.cs" />
+    <Compile Include="Assets\Services\UICtrl\Interfaces\IUIController.cs" />
+    <Compile Include="Assets\Services\UIs\Interfaces\IUIMode.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
@@ -184,5 +183,6 @@
     <None Include="Assets\UnityTestTools\LICENSE.txt" />
     <None Include="Assets\UnityTestTools\changelog.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

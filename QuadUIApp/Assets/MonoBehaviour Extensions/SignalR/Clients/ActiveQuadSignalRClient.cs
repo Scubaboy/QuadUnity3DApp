@@ -1,20 +1,19 @@
-﻿using Assets.MonoBehaviour_Extensions.SignalR.Controllers;
-using Assets.MonoBehaviour_Extensions.SignalR.Interfaces.SignalRClientContainers;
-using Assets.Services.Interfaces;
-using Assets.Services.SignalR.Client;
-using Assets.Services.SignalR.Models;
-using Assets.Services.SignalR.MsgParser;
-using Assets.Services.SignalR.MsgToClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using Assets.MonoBehaviour_Extensions.SignalR.Container_Events.ActiveQuadContainer;
-using Assets.Services.SignalR.MsgParser.JsonParser;
-
-namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
+﻿namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
 {
+    using Container_Events.ActiveQuadContainer;
+    using Controllers;
+    using Interfaces.SignalRClientContainers;
+    using Services.Interfaces;
+    using Services.SignalR.Client;
+    using Services.SignalR.Models;
+    using Services.SignalR.MsgParser.JsonParser;
+    using System;
+    using System.Collections.Generic;
+    using UnityEngine;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class ActiveQuadSignalRClient : SignalRClient, ISignalRActiveQuadContainer
     {
         /// <summary>
@@ -42,7 +41,6 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
                 { "ActiveQuads", new HubToClientMsgParserJson<List<ActiveQuad>>()}
             };
 
-         //   this.ParamsToClass = new MsgParamsToClass();
             this.HubConnectionParams = new HubConnectionParams("ActiveQuadsHub", "localhost:8080", false);
 
             //Get the SignalR Client Controller.
@@ -67,9 +65,6 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
         {
             //Register the client with the client controller.
             this.clientController.RegisterClient(this);
-
-            //Test message send
-            this.Send<ActiveQuad>(new ActiveQuad() { QuadId = "ff" });
         }
 
         /// <summary>
