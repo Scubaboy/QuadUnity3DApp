@@ -7,8 +7,11 @@ namespace Assets.Services.UIs.Interfaces
 {
     public interface IUIMode
     {
-        void Execute();
+        void Activate();
 
-        bool IsExecuting();
+        void Disable();
+
+        bool IsVisible { get; }
+
     }
 }

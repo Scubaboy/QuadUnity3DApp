@@ -40,4 +40,43 @@ namespace Assets.Services.ModeCtrl
         /// </summary>
         Execute
     };
+
+    public enum ExecutionStatus
+    {
+        Complete,
+
+        Canceled,
+
+        Running,
+
+        Requested
+    };
+
+    public struct ModeMapping
+    {
+        private Modes canceledMode;
+        private Modes completedMode;
+
+        public ModeMapping(Modes canceled, Modes Completed)
+        {
+            this.canceledMode = canceled;
+            this.completedMode = Completed;
+        }
+        public Modes Canceled
+        {
+            get
+            {
+                return canceledMode;
+            }
+
+        }
+
+        public Modes Completed
+        {
+            get
+            {
+                return this.completedMode;
+            }
+        }
+    }
 }

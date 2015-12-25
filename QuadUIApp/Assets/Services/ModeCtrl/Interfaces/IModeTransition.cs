@@ -8,6 +8,6 @@ namespace Assets.Services.ModeCtrl.Interfaces
     public interface IModeTransition
     {
         Modes ActiveMode { get; set; }
-        bool Complete { get; set; }
+        ExecutionStatus Status { get; set; }
     }
 }
