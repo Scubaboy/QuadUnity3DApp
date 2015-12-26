@@ -95,9 +95,14 @@
     <Compile Include="Assets\Services\Interfaces\ISignalRMsgParserString.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRTransportCtrl.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRTransportFactory.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeController.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTransition.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Controllers\ModeTrackingController.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTracking.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateMode.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateModeRegister.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateStatus.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateStatusRegister.cs" />
     <Compile Include="Assets\Services\ModeCtrl\Types.cs" />
+    <Compile Include="Assets\Services\ModeUICtrl\Interfaces\IModeUIController.cs" />
     <Compile Include="Assets\Services\SignalR\Client\SignalRClient.cs" />
     <Compile Include="Assets\Services\SignalR\Controllers\ClientController.cs" />
     <Compile Include="Assets\Services\SignalR\Controllers\HubConnController.cs" />
@@ -120,6 +125,7 @@
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\TransportProtocolTypes.cs" />
     <Compile Include="Assets\Services\SignalR\SignalRService.cs" />
     <Compile Include="Assets\Services\UICtrl\Controllers\UIController.cs" />
+    <Compile Include="Assets\Services\UICtrl\Exceptions\UIAlreadyMappedToModeException.cs" />
     <Compile Include="Assets\Services\UICtrl\Interfaces\IUIController.cs" />
     <Compile Include="Assets\Services\UIs\Interfaces\IUIMode.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
@@ -184,5 +190,6 @@
     <None Include="Assets\UnityTestTools\LICENSE.txt" />
     <None Include="Assets\UnityTestTools\changelog.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

@@ -5,10 +5,9 @@ using System.Text;
 
 namespace Assets.Services.ModeCtrl.Interfaces
 {
-    public interface IModeController
+    public interface IModeTracking
     {
-        Modes GetActiveMode();
-
-        void Transition(IModeTransition modeTransObj);
+        Modes ActiveMode { get; }
+        ExecutionStatus Status { get; }
     }
 }

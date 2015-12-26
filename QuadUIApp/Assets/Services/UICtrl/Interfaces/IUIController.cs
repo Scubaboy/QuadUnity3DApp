@@ -1,5 +1,6 @@
 ﻿using Assets.Services.ModeCtrl;
 using Assets.Services.ModeCtrl.Interfaces;
+using Assets.Services.ModeUICtrl.Interfaces;
 using Assets.Services.UIs.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,7 @@ namespace Assets.Services.UICtrl.Interfaces
 {
     public interface IUIController
     {
-        void DisplayUIForMode(IModeTransition modeTransObj);
-
-        void RegisterUIForMode(Modes mode, IUIMode theUI);
+        void UpdateDisplayUIForMode(IModeTrackingUpdateMode modeTracker, IModeUIController modeUiController);
+       
     }
 }
