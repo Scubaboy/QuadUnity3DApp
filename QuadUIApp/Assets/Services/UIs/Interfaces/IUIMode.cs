@@ -8,6 +8,7 @@ namespace Assets.Services.UIs.Interfaces
 {
     public interface IUIMode
     {
+        //Change status to running in the active method.
         void Activate();
 
         void Disable();

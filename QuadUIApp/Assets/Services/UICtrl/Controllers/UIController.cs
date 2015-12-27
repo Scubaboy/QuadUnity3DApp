@@ -14,7 +14,6 @@ namespace Assets.Services.UICtrl.Controllers
 {
     public class UIController : MonoBehaviour, IUIController
     { 
-        //protected Dictionary<Modes, IUIMode> modeUIMapping;
         protected Dictionary<Modes, ModeMapping> NextMode;
 
         public void UpdateDisplayUIForMode(IModeTrackingUpdateMode modeTracker, IModeUIController modeUiController)

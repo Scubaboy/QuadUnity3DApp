@@ -84,6 +84,7 @@
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRClientController.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRHubConnController.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Factories\Transport\Factory\SignalRTransportFactory.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\Views\Select\SelectActiveQuad.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRCallbackAction.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRClient.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRClientConnect.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateStatus.cs" />
     <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateStatusRegister.cs" />
     <Compile Include="Assets\Services\ModeCtrl\Types.cs" />
+    <Compile Include="Assets\Services\ModeUICtrl\Controllers\ModeUIController.cs" />
     <Compile Include="Assets\Services\ModeUICtrl\Interfaces\IModeUIController.cs" />
     <Compile Include="Assets\Services\SignalR\Client\SignalRClient.cs" />
     <Compile Include="Assets\Services\SignalR\Controllers\ClientController.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="Assets\Services\UICtrl\Controllers\UIController.cs" />
     <Compile Include="Assets\Services\UICtrl\Exceptions\UIAlreadyMappedToModeException.cs" />
     <Compile Include="Assets\Services\UICtrl\Interfaces\IUIController.cs" />
+    <Compile Include="Assets\Services\UIs\Controllers\SelectActiveQuadUICtrl.cs" />
     <Compile Include="Assets\Services\UIs\Interfaces\IUIMode.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />

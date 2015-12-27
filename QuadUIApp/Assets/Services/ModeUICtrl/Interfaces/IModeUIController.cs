@@ -10,8 +10,8 @@ namespace Assets.Services.ModeUICtrl.Interfaces
 {
     public interface IModeUIController
     {
-        void ActivateUI(IModeTrackingUpdateMode modeTracker, IUIController uiController);
-        void DiactiveUI(IModeTrackingUpdateMode modeTracker, IUIController uiController);
+        void ActivateUI(IModeTracking modeTracker, IUIController uiController);
+        void DiactiveUI(IModeTracking modeTracker, IUIController uiController);
         void RegisterToControlUI(IUIController uiController);
     }
 }
