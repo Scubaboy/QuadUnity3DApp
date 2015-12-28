@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.3f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -97,6 +95,10 @@
     <Compile Include="Assets\Services\Interfaces\ISignalRTransportCtrl.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRTransportFactory.cs" />
     <Compile Include="Assets\Services\ModeCtrl\Controllers\ModeTrackingController.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Exceptions\UICtrlAlreadyRegisteredException.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Exceptions\UICtrlNotRegisteredException.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Exceptions\ViewCtrlAlreadyRegisteredException.cs" />
+    <Compile Include="Assets\Services\ModeCtrl\Exceptions\ViewCtrlNotRegisteredException.cs" />
     <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTracking.cs" />
     <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateMode.cs" />
     <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateModeRegister.cs" />
@@ -193,6 +195,5 @@
     <None Include="Assets\UnityTestTools\LICENSE.txt" />
     <None Include="Assets\UnityTestTools\changelog.txt" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
