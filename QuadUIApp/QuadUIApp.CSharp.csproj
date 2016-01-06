@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.3f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,6 +59,12 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -76,13 +84,17 @@
   <ItemGroup>
     <Compile Include="Assets\Exceptions\SignalRClientExceptions\SignalRClientMethodRegisterUnknownException.cs" />
     <Compile Include="Assets\Exceptions\SignalRClientExceptions\SignalRClientUnsupportedSendMsgTypeException.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\ModeControl\ModeController.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\ModeViewController\ModeViewCtrl.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Clients\ActiveQuadSignalRClient.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container Events\ActiveQuadContainer\ActiveQuadsUpdateEventArgs.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container Interfaces\SignalRClientContainers\ISignalRActiveQuadContainer.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRClientController.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRHubConnController.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Factories\Transport\Factory\SignalRTransportFactory.cs" />
-    <Compile Include="Assets\MonoBehaviour Extensions\Views\Select\SelectActiveQuad.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\ViewController\ViewCtrl.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Initialise\InitialiseView.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Select\SelectActiveQuadView.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRCallbackAction.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRClient.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRClientConnect.cs" />
@@ -94,19 +106,19 @@
     <Compile Include="Assets\Services\Interfaces\ISignalRMsgParserString.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRTransportCtrl.cs" />
     <Compile Include="Assets\Services\Interfaces\ISignalRTransportFactory.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Controllers\ModeTrackingController.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Exceptions\UICtrlAlreadyRegisteredException.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Exceptions\UICtrlNotRegisteredException.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Exceptions\ViewCtrlAlreadyRegisteredException.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Exceptions\ViewCtrlNotRegisteredException.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTracking.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateMode.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateModeRegister.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateStatus.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Interfaces\IModeTrackingUpdateStatusRegister.cs" />
-    <Compile Include="Assets\Services\ModeCtrl\Types.cs" />
-    <Compile Include="Assets\Services\ModeUICtrl\Controllers\ModeUIController.cs" />
-    <Compile Include="Assets\Services\ModeUICtrl\Interfaces\IModeUIController.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeControl\Controllers\ModeTrackingController.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeControl\Exceptions\UICtrlAlreadyRegisteredException.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeControl\Exceptions\UICtrlNotRegisteredException.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeControl\Exceptions\ViewCtrlAlreadyRegisteredException.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeControl\Exceptions\ViewCtrlNotRegisteredException.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeControl\Interfaces\IModeTracking.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeControl\Interfaces\IModeTrackingUpdateMode.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeControl\Interfaces\IModeTrackingUpdateModeRegister.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeControl\Interfaces\IModeTrackingUpdateStatus.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeControl\Interfaces\IModeTrackingUpdateStatusRegister.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeControl\Types.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeViewControl\Controllers\BaseModeViewController.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ModeViewControl\Interfaces\IModeViewController.cs" />
     <Compile Include="Assets\Services\SignalR\Client\SignalRClient.cs" />
     <Compile Include="Assets\Services\SignalR\Controllers\ClientController.cs" />
     <Compile Include="Assets\Services\SignalR\Controllers\HubConnController.cs" />
@@ -128,11 +140,11 @@
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\SignalRTransportWS.cs" />
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\TransportProtocolTypes.cs" />
     <Compile Include="Assets\Services\SignalR\SignalRService.cs" />
-    <Compile Include="Assets\Services\UICtrl\Controllers\UIController.cs" />
-    <Compile Include="Assets\Services\UICtrl\Exceptions\UIAlreadyMappedToModeException.cs" />
-    <Compile Include="Assets\Services\UICtrl\Interfaces\IUIController.cs" />
-    <Compile Include="Assets\Services\UIs\Controllers\SelectActiveQuadUICtrl.cs" />
-    <Compile Include="Assets\Services\UIs\Interfaces\IUIMode.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ViewControl\Controllers\BaseViewController.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ViewControl\Exceptions\ViewAlreadyMappedToModeException.cs" />
+    <Compile Include="Assets\Services\ViewSystem\ViewControl\Interfaces\IViewController.cs" />
+    <Compile Include="Assets\Services\ViewSystem\View\Controller\BaseView.cs" />
+    <Compile Include="Assets\Services\ViewSystem\View\Interfaces\IView.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
@@ -195,5 +207,6 @@
     <None Include="Assets\UnityTestTools\LICENSE.txt" />
     <None Include="Assets\UnityTestTools\changelog.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

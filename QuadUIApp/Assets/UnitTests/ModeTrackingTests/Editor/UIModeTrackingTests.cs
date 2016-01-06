@@ -1,14 +1,10 @@
-﻿using Assets.Services.ModeCtrl;
-using Assets.Services.ModeCtrl.Controllers;
-using Assets.Services.ModeCtrl.Exceptions;
-using Assets.Services.UICtrl.Interfaces;
-using Assets.Services.UIs.Interfaces;
+﻿using Assets.Services.ViewSystem.ModeControl;
+using Assets.Services.ViewSystem.ModeControl.Controllers;
+using Assets.Services.ViewSystem.ModeControl.Exceptions;
+using Assets.Services.ViewSystem.View.Interfaces;
+using Assets.Services.ViewSystem.ViewControl.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Assets.UnitTests.ModeTrackingTests.Editor
 {
@@ -19,7 +15,7 @@ namespace Assets.UnitTests.ModeTrackingTests.Editor
         public void UIControllerOnlyRegisterOnceExcptionIfMore()
         {
             //Arrange
-            var mockedCtrl = Substitute.For<IUIController>();
+            var mockedCtrl = Substitute.For<IViewController>();
             var register = new ModeTrackingController();
 
             //Act
@@ -33,7 +29,7 @@ namespace Assets.UnitTests.ModeTrackingTests.Editor
         public void ViewControllerOnlyRegisterOnceExcptionIfMore()
         {
             //Arrange
-            var mockedCtrl = Substitute.For<IUIMode>();
+            var mockedCtrl = Substitute.For<IView>();
             var register = new ModeTrackingController();
 
             //Act
@@ -47,7 +43,7 @@ namespace Assets.UnitTests.ModeTrackingTests.Editor
         public void UnRegisteredUICtrlCannotChangeModeException()
         {
             //Arrange
-            var mockedCtrl = Substitute.For<IUIController>();
+            var mockedCtrl = Substitute.For<IViewController>();
             var register = new ModeTrackingController();
 
             //Assert
@@ -58,7 +54,7 @@ namespace Assets.UnitTests.ModeTrackingTests.Editor
         public void UnRegisteredViewCtrlCannotChangeStatusException()
         {
             //Arrange
-            var mockedCtrl = Substitute.For<IUIMode>();
+            var mockedCtrl = Substitute.For<IView>();
             var register = new ModeTrackingController();
 
             //Assert
@@ -69,7 +65,7 @@ namespace Assets.UnitTests.ModeTrackingTests.Editor
         public void RegisteredUICtrlCanChangeMode()
         {
             //Arrange
-            var mockedCtrl = Substitute.For<IUIController>();
+            var mockedCtrl = Substitute.For<IViewController>();
             var register = new ModeTrackingController();
 
             //Act
@@ -84,7 +80,7 @@ namespace Assets.UnitTests.ModeTrackingTests.Editor
         public void RegisteredViewCtrlCanChangeStatus()
         {
             //Arrange
-            var mockedCtrl = Substitute.For<IUIMode>();
+            var mockedCtrl = Substitute.For<IView>();
             var register = new ModeTrackingController();
 
             //Act
