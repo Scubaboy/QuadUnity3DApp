@@ -13,9 +13,20 @@ namespace Assets.Services.ViewSystem.View.Controller
 
         private IModeTrackingUpdateStatusRegister modeStatusUpdateRegister;
 
+        private bool isActive = false;
+
         public bool IsVisible
         {
-            get; private set;
+            get
+            {
+                return this.isActive;
+            }
+
+            private set
+            {
+                this.isActive = value;
+                gameObject.SetActive(value);
+            }
         }
 
         void Awake()
@@ -30,6 +41,8 @@ namespace Assets.Services.ViewSystem.View.Controller
             //Register to update the mode status.
             this.modeStatusUpdateRegister.RegisterToUpdate(this);
 
+            //Disable the view.
+            this.IsVisible = false;
         }
 
         public virtual void Activate()
