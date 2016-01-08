@@ -10,7 +10,7 @@ namespace Assets.Services.ViewSystem.ModeViewControl.Controllers
 {
     public class BaseModeViewController : MonoBehaviour, IModeViewController
     {
-        protected List<IViewController> registeredUIControllers;
+        protected List<IViewController> registeredUIControllers = new List<IViewController>();
         protected Dictionary<Modes, IView> modeUIMapping;
 
         public void ActivateView(IModeTracking modeTracker, IViewController viewController)

@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.3f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -85,8 +87,9 @@
     <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\ModeControl\ModeController.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\ModeViewController\ModeViewCtrl.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\ViewController\ViewCtrl.cs" />
-    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Initialise\InitialiseView.cs" />
-    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Select\SelectActiveQuadView.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Dynamic\Initialise\InitialiseView.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Dynamic\Select\SelectActiveQuadView.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Fixed\Menu\MenuView.cs" />
     <Compile Include="Assets\Scripts\ActiveStateToggler.cs" />
     <Compile Include="Assets\Scripts\ApplicationManager.cs" />
     <Compile Include="Assets\Scripts\ChangeColor.cs" />
@@ -213,5 +216,6 @@
     <None Include="Assets\UnityTestTools\LICENSE.txt" />
     <None Include="Assets\UnityTestTools\changelog.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Services.ViewSystem.View.Controller
 {
-    public abstract class BaseViewController : MonoBehaviour, IView
+    public  class BaseViewController : MonoBehaviour, IView
     {
         private IModeTrackingUpdateStatus modeStatusUpdate;
 
@@ -22,14 +22,14 @@ namespace Assets.Services.ViewSystem.View.Controller
                 return this.isActive;
             }
 
-            private set
+            protected set
             {
                 this.isActive = value;
                 gameObject.SetActive(value);
             }
         }
 
-        void Awake()
+        public virtual void Awake()
         {
             //Get the mode tracking object.
             var modeTrackingController = FindObjectOfType<ModeTrackingController>()
@@ -40,8 +40,10 @@ namespace Assets.Services.ViewSystem.View.Controller
 
             //Register to update the mode status.
             this.modeStatusUpdateRegister.RegisterToUpdate(this);
+        }
 
-            //Disable the view.
+        void Start()
+        {
             this.IsVisible = false;
         }
 

@@ -9,9 +9,9 @@ namespace Assets.MonoBehaviour_Extensions.ViewSystem.ModeControl
 {
     public class ModeController : ModeTrackingController
     {
-        void Awake()
+        public override void Awake()
         {
-            this.ActiveMode = Modes.Initialise;
+            base.Awake();
         }
     }
 }

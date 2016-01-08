@@ -14,9 +14,15 @@ namespace Assets.Services.ViewSystem.ModeControl.Controllers
 
         private List<IView> registeredModeControllers = new List<IView>();
 
+        public virtual void Awake()
+        {
+            this.Status = ExecutionStatus.Requested;
+            this.ActiveMode = Modes.Initialise;
+        }
+
         public Modes ActiveMode
         {
-          get; protected set;
+          get; private set;
         }
 
         public ExecutionStatus Status

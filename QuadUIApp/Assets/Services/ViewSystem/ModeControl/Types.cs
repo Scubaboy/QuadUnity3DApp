@@ -49,7 +49,9 @@ namespace Assets.Services.ViewSystem.ModeControl
 
         Running,
 
-        Requested
+        Requested,
+
+        Avaliable
     };
 
     public struct ModeMapping
