@@ -10,5 +10,7 @@ namespace Assets.MonoBehaviour_Extensions.SignalR.Interfaces.SignalRClientContai
     public interface ISignalRActiveQuadContainer
     {
         event ActiveQuadsUpdateEventHandler ActiveQuads;
+        void ConfirmQuadSelection(ActiveQuad selectedQuad);
+        event QuadSelectionConfirmedEventHandler QuadSelectionConfirmed;
     }
 }

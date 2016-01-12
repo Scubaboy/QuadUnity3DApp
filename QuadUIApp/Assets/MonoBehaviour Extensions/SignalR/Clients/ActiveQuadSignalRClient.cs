@@ -25,6 +25,7 @@
         /// 
         /// </summary>
         public event ActiveQuadsUpdateEventHandler ActiveQuads;
+        public event QuadSelectionConfirmedEventHandler QuadSelectionConfirmed;
 
         /// <summary>
         /// Setup the clients configuration.
@@ -38,7 +39,8 @@
 
             this.ClientMethodTypeMapping = new Dictionary<string, ISignalRMsgParserJson>
             {
-                { "ActiveQuads", new HubToClientMsgParserJson<List<ActiveQuad>>()}
+                { "ActiveQuads", new HubToClientMsgParserJson<List<ActiveQuad>>()},
+                { "ConfirmQuadSelection", new HubToClientMsgParserJson<QuadSelectionConfirmed>() }
             };
 
             this.HubConnectionParams = new HubConnectionParams("ActiveQuadsHub", "localhost:8080", false);
@@ -50,6 +52,7 @@
             
             //Regsiter SignalRlient Container callback
             this.Register<List<ActiveQuad>>("ActiveQuads", this.ActiveQuadsCallback);
+            this.Register<QuadSelectionConfirmed>("ConfirmQuadSelection", this.QuadSelectionConfirmedCallback);
         }
 
         /// <summary>
@@ -59,6 +62,11 @@
         private void ActiveQuadsCallback(List<ActiveQuad> activeQuads)
         {
             this.OnActiveQuadUpdate(new ActiveQuadsUpdateEventArgs(activeQuads));
+        }
+
+        private void QuadSelectionConfirmedCallback(QuadSelectionConfirmed confirmation)
+        {
+
         }
 
         void Start()
@@ -81,5 +89,20 @@
             }
         }
 
+        protected virtual void OnConfirmQuadSelection(QuadSelectionConfirmedEventArgs args)
+        {
+            QuadSelectionConfirmedEventHandler confirmSelectionHandler = this.QuadSelectionConfirmed;
+
+            if (confirmSelectionHandler != null)
+            {
+                confirmSelectionHandler(this, args);
+            }
+
+        }
+
+        public void ConfirmQuadSelection(ActiveQuad selectedQuad)
+        {
+            this.Send<ActiveQuad>(selectedQuad);
+        }
     }
 }

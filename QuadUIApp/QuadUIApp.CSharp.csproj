@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.3f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,6 +59,12 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -78,6 +86,7 @@
     <Compile Include="Assets\Exceptions\SignalRClientExceptions\SignalRClientUnsupportedSendMsgTypeException.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Clients\ActiveQuadSignalRClient.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container Events\ActiveQuadContainer\ActiveQuadsUpdateEventArgs.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container Events\ActiveQuadContainer\QuadSelectionConfirmedEventArgs.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container Interfaces\SignalRClientContainers\ISignalRActiveQuadContainer.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRClientController.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRHubConnController.cs" />
@@ -120,6 +129,7 @@
     <Compile Include="Assets\Services\SignalR\Models\HubConnectionParams.cs" />
     <Compile Include="Assets\Services\SignalR\Models\NegotiateResponse.cs" />
     <Compile Include="Assets\Services\SignalR\Models\PingResponse.cs" />
+    <Compile Include="Assets\Services\SignalR\Models\QuadSelectionConfirmed.cs" />
     <Compile Include="Assets\Services\SignalR\Models\ReceivedSignalRMsg.cs" />
     <Compile Include="Assets\Services\SignalR\Models\Types.cs" />
     <Compile Include="Assets\Services\SignalR\MsgParser\HubToClientMsgParser.cs" />
