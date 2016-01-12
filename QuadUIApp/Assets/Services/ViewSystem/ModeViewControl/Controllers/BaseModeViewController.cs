@@ -5,49 +5,107 @@ using Assets.Services.ViewSystem.View.Interfaces;
 using Assets.Services.ViewSystem.ViewControl.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Assets.Services.ViewSystem.ModeViewControl.Controllers
 {
     public class BaseModeViewController : MonoBehaviour, IModeViewController
     {
-        protected List<IViewController> registeredUIControllers = new List<IViewController>();
-        protected Dictionary<Modes, IView> modeUIMapping;
+        /// <summary>
+        /// 
+        /// </summary>
+        protected List<IViewController> registeredDynamicViewsUIControllers = new List<IViewController>();
 
-        public void ActivateView(IModeTracking modeTracker, IViewController viewController)
+        /// <summary>
+        /// 
+        /// </summary>
+        protected List<IViewController> registeredFixedViewsUIOControllers = new List<IViewController>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected Dictionary<Modes, IView> modeDynamicViewMappings;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected Dictionary<FixedViews, IView> fixedViewsMappings;
+
+
+        public void ActivateDynamicView(IModeTracking modeTracker, IViewController viewController)
         {
-            if (this.registeredUIControllers != null && this.modeUIMapping != null)
+            if (this.registeredDynamicViewsUIControllers != null && this.modeDynamicViewMappings != null)
             {
-                if (this.registeredUIControllers.Contains(viewController))
+                if (this.registeredDynamicViewsUIControllers.Contains(viewController))
                 {
-                    if (this.modeUIMapping.ContainsKey(modeTracker.ActiveMode))
+                    if (this.modeDynamicViewMappings.ContainsKey(modeTracker.ActiveMode))
                     {
-                        modeUIMapping[modeTracker.ActiveMode].Activate();
+                        modeDynamicViewMappings[modeTracker.ActiveMode].Activate();
                     }
                 }
             }
         }
 
-        public void DiactiveView(IModeTracking modeTracker, IViewController viewController)
+        public void DisactiveDynamicView(IModeTracking modeTracker, IViewController viewController)
         {
-            if (this.registeredUIControllers != null && this.modeUIMapping != null)
+            if (this.registeredDynamicViewsUIControllers != null && this.modeDynamicViewMappings != null)
             {
-                if (this.registeredUIControllers.Contains(viewController))
+                if (this.registeredDynamicViewsUIControllers.Contains(viewController))
                 {
-                    if (this.modeUIMapping.ContainsKey(modeTracker.ActiveMode))
+                    if (this.modeDynamicViewMappings.ContainsKey(modeTracker.ActiveMode))
                     {
-                        modeUIMapping[modeTracker.ActiveMode].Disable();
+                        modeDynamicViewMappings[modeTracker.ActiveMode].Disable();
                     }
                 }
             }
         }
 
-        public void RegisterToControlView(IViewController viewController)
+        public void RegisterToControlDynamicViews(IViewController viewController)
         {
-            if (this.registeredUIControllers !=null)
+            if (this.registeredDynamicViewsUIControllers !=null)
             {
-                if (!this.registeredUIControllers.Contains(viewController))
+                if (!this.registeredDynamicViewsUIControllers.Contains(viewController))
                 {
-                    this.registeredUIControllers.Add(viewController);
+                    this.registeredDynamicViewsUIControllers.Add(viewController);
+                }
+            }
+        }
+
+        public void RegisterToControlFixedViews(IViewController viewController)
+        {
+            if (this.registeredFixedViewsUIOControllers != null)
+            {
+                if (!this.registeredFixedViewsUIOControllers.Contains(viewController))
+                {
+                    this.registeredFixedViewsUIOControllers.Add(viewController);
+                }
+            }
+        }
+
+        public void ActivateFixedView(FixedViews fixedView, IViewController viewController)
+        {
+            if (this.registeredFixedViewsUIOControllers != null && this.fixedViewsMappings != null)
+            {
+                if (this.registeredDynamicViewsUIControllers.Contains(viewController))
+                {
+                    if (this.fixedViewsMappings.ContainsKey(fixedView))
+                    {
+                        fixedViewsMappings[fixedView].Activate();
+                    }
+                }
+            }
+        }
+
+        public void DisableFixedView(FixedViews fixedView, IViewController viewController)
+        {
+            if (this.registeredFixedViewsUIOControllers != null && this.fixedViewsMappings != null)
+            {
+                if (this.registeredDynamicViewsUIControllers.Contains(viewController))
+                {
+                    if (this.fixedViewsMappings.ContainsKey(fixedView))
+                    {
+                        fixedViewsMappings[fixedView].Disable();
+                    }
                 }
             }
         }

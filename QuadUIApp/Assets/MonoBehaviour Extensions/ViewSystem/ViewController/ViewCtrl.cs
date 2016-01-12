@@ -45,8 +45,16 @@ namespace Assets.MonoBehaviour_Extensions.ViewSystem.ViewController
             };
 
             //Register
-            this.modeViewController.RegisterToControlView(this);
+            this.modeViewController.RegisterToControlDynamicViews(this);
+            this.modeViewController.RegisterToControlFixedViews(this);
             this.modeTrackingUpdateRegister.RegisterToUpdate(this);
+        }
+
+        void Start()
+        {
+            //Initialise fixed views
+            this.modeViewController.ActivateFixedView(FixedViews.Menu,this);
+            this.modeViewController.ActivateFixedView(FixedViews.StatusFeed, this);
         }
 
         void Update()

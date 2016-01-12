@@ -5,6 +5,13 @@ using System.Text;
 
 namespace Assets.Services.ViewSystem.ModeControl
 {
+    public enum FixedViews
+    {
+        Menu,
+
+        StatusFeed
+    }
+
     /// <summary>
     /// 
     /// </summary>
