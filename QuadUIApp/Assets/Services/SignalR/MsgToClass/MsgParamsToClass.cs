@@ -1,5 +1,4 @@
 ﻿using Assets.Services.Interfaces;
-using Assets.Services.SignalR.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

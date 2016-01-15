@@ -1,6 +1,6 @@
 ﻿namespace Assets.Services.Interfaces
 {
-    using Assets.Services.SignalR.Models;
+    using Models;
     using System;
     using System.Collections.Generic;
 

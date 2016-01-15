@@ -8,5 +8,9 @@ namespace Assets.MonoBehaviour_Extensions.ViewSystem.Views.Fixed.Status_Feeds
 {
     public class StatusFeedsView : BaseViewController
     {
+        protected override void ConfigureView()
+        {
+            
+        }
     }
 }

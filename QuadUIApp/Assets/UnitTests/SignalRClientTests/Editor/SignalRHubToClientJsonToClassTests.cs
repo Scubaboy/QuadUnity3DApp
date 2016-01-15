@@ -1,4 +1,4 @@
-﻿using Assets.Services.SignalR.Models;
+﻿using Assets.Services.Models;
 using Assets.Services.SignalR.MsgToClass;
 using NUnit.Framework;
 using System;

@@ -22,5 +22,9 @@ namespace Assets.MonoBehaviour_Extensions.ViewSystem.Views.Dynamic.Initialise
         {
             base.Complete();
         }
+
+        protected override void ConfigureView()
+        {
+        }
     }
 }

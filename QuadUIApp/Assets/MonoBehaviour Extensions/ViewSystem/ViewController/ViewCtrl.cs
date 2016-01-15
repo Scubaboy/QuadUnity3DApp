@@ -38,7 +38,7 @@ namespace Assets.MonoBehaviour_Extensions.ViewSystem.ViewController
             this.NextMode = new Dictionary<Modes, ModeMapping>
             {
                 {Modes.Initialise, new ModeMapping(Modes.Initialise, Modes.SelectQuad) },
-                {Modes.SelectQuad, new ModeMapping(Modes.SelectQuad,Modes.ConfigureQuad) },
+                {Modes.SelectQuad, new ModeMapping(Modes.Initialise,Modes.ConfigureQuad) },
                 {Modes.ConfigureQuad, new ModeMapping(Modes.SelectQuad, Modes.CalibrateTestQuad) },
                 {Modes.MissionPlan, new ModeMapping(Modes.ConfigureQuad, Modes.Execute) },
                 {Modes.Execute, new ModeMapping(Modes.MissionPlan, Modes.MissionPlan) }

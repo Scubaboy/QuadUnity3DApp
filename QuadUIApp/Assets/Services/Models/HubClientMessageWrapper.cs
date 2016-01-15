@@ -1,4 +1,4 @@
-﻿namespace Assets.Services.SignalR.Models
+﻿namespace Assets.Services.Models
 {
     /// <summary>
     /// Defines the structure of a Signalr hub to client message.

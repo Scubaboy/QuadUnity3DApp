@@ -1,5 +1,5 @@
 ﻿using Assets.Services.Interfaces;
-using Assets.Services.SignalR.Models;
+using Assets.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

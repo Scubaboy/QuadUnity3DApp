@@ -1,11 +1,11 @@
 ﻿namespace Assets.MonoBehaviour_Extensions.SignalR.Clients
 {
+    using Services.Models;
     using Container_Events.ActiveQuadContainer;
     using Controllers;
     using Interfaces.SignalRClientContainers;
     using Services.Interfaces;
     using Services.SignalR.Client;
-    using Services.SignalR.Models;
     using Services.SignalR.MsgParser.JsonParser;
     using System;
     using System.Collections.Generic;
@@ -66,7 +66,7 @@
 
         private void QuadSelectionConfirmedCallback(QuadSelectionConfirmed confirmation)
         {
-
+            this.OnConfirmQuadSelection(new QuadSelectionConfirmedEventArgs(confirmation.TheQuad, confirmation.Confirmed));
         }
 
         void Start()

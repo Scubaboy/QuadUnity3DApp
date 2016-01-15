@@ -1,4 +1,4 @@
-﻿namespace Assets.Services.SignalR.Models
+﻿namespace Assets.Services.Models
 {
     /// <summary>
     /// Defines the parameters used to create a connection to a SignalR hub.

@@ -94,6 +94,11 @@ namespace Assets.MonoBehaviour_Extensions.ViewSystem.Views.Fixed.Menu
             });
         }
 
+        protected override void ConfigureView()
+        {
+           
+        }
+
         private void ConfigureModesToMenuOptions()
         {
             this.modeToMenuOptionMappins = new Dictionary<Modes, Action>

@@ -6,10 +6,10 @@
     using System.Collections.Generic;
     using System;
     using Services.SignalR.Client;
-    using Services.SignalR.Models;
     using NSubstitute;
     using Services.Interfaces;
     using Services.SignalR.MsgParser.JsonParser;
+    using Services.Models;
 
     [TestFixture]
     internal class SignalRHubToClientMsgCallbackActivationTests

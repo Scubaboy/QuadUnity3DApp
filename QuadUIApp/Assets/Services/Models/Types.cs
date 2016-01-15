@@ -1,4 +1,4 @@
-﻿namespace Assets.Services.SignalR.Models
+﻿namespace Assets.Services.Models
 {
     public enum CommsOptions
     {

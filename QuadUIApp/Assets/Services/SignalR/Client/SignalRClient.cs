@@ -2,14 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using Assets.Services.SignalR.Models;
 using Assets.Exceptions.SignalRClientExceptions;
 using UnityEngine;
 using Assets.Services.SignalR.MsgParser.jsonParser;
 using Assets.Services.SignalR.MsgParser.JsonParser;
 using Assets.Services.SignalR.MsgParser;
+using Assets.Services.Models;
 
 namespace Assets.Services.SignalR.Client
 {
