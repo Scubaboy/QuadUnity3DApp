@@ -1,6 +1,6 @@
 ﻿namespace Assets.MonoBehaviour_Extensions.SignalR.Controllers
 {
-    using Services.Interfaces;
+    using Services.SignalR.Interfaces;
     using Services.SignalR.Controllers;
     using System.Collections.Generic;
     using System.Linq;

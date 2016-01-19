@@ -1,6 +1,5 @@
 ﻿namespace Assets.Services.SignalR.Protocols.WebSockets
 {
-    using Assets.Services.Interfaces;
     using Models;
     using Newtonsoft.Json;
     using System;
@@ -10,6 +9,7 @@
     using WebSocketSharp;
     using System.Linq;
     using Parsers;
+    using Interfaces;
 
     public class SignalRTransportWS : ISignalRTransportCtrl
     {

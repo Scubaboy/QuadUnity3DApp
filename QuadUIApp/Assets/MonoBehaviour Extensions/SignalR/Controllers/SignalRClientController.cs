@@ -1,11 +1,10 @@
 ﻿namespace Assets.MonoBehaviour_Extensions.SignalR.Controllers
 {
     using UnityEngine;
-    using Services.Interfaces;
-    using System;
     using System.Collections.Generic;
     using Factories.Transport.Factory;
     using Services.SignalR.Controllers;
+    using Services.SignalR.Interfaces;
 
     public class SignalRClientController : ClientController
     {

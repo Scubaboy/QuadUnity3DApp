@@ -1,15 +1,13 @@
 ﻿namespace Assets.UnitTests.SignalRClients.Editor
 {
-    using Services.SignalR.MsgToClass;
     using NUnit.Framework;
-    using Services.SignalR.MsgParser;
     using System.Collections.Generic;
     using System;
     using Services.SignalR.Client;
     using NSubstitute;
-    using Services.Interfaces;
     using Services.SignalR.MsgParser.JsonParser;
     using Services.Models;
+    using Services.SignalR.Interfaces;
 
     [TestFixture]
     internal class SignalRHubToClientMsgCallbackActivationTests
@@ -34,12 +32,6 @@
                 ClientMethodTypeMapping = clientMethodTypeMapping,
                 HubConnectionParams = new HubConnectionParams("ActiveQuadsHub", "myserer", false)
             };
-               // msgParser,
-               // jsonMsgToClass, 
-               // hubMethodTypeMapping, 
-               // clientMethodTypeMapping, 
-               // new HubConnectionParams("ActiveQuadHub","myserer",false)
-               // );
 
             signalRClient.Register<List<ActiveQuad>>("ActiveQuads",theCallback);
 

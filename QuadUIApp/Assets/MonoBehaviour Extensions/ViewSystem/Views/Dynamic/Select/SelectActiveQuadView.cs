@@ -1,13 +1,14 @@
 ﻿namespace Assets.MonoBehaviour_Extensions.ViewSystem.Views.Dynamic.Select
 {
-    using SignalR.Interfaces.SignalRClientContainers;
     using Services.ViewSystem.View.Controller;
     using UnityEngine.UI;
     using SignalR.Clients;
-    using SignalR.Container_Events.ActiveQuadContainer;
     using System.Linq;
     using System.Collections.Generic;
     using Services.Models;
+    using SignalR.Container_EventsCallbacks.ActiveQuadContainer;
+    using SignalR.Clients.ActiveQuads.Interfaces;
+    using SignalR.Clients.ActiveQuads;
 
     public class SelectActiveQuadView : BaseViewController 
     {
@@ -17,7 +18,7 @@
         public Button OkView;
         public Text Notifications;
         public Text SelectionBoxHeader;
-        private ISignalRActiveQuadContainer activeQuadSignalRNotifier;
+        private ISignalRActiveQuadViewAccess activeQuadSignalRViewClient;
         private List<ActiveQuad> activeQuads;
         private ActiveQuad userSelectedQuad;
         private bool waitingSelectedQuadConfirmation;
@@ -27,11 +28,14 @@
             base.Awake();
 
             //Register with the ActiveQuad SignalR container.
-            this.activeQuadSignalRNotifier = FindObjectOfType<ActiveQuadSignalRClient>()
-                .GetComponent <ActiveQuadSignalRClient>() as ISignalRActiveQuadContainer;
+            this.activeQuadSignalRViewClient = FindObjectOfType<ActiveQuadSignalRClient>()
+                .GetComponent <ActiveQuadSignalRClient>() as ISignalRActiveQuadViewAccess;
 
-            this.activeQuadSignalRNotifier.ActiveQuads += ActiveQuadSignalRNotifier_ActiveQuads;
-            this.activeQuadSignalRNotifier.QuadSelectionConfirmed += ActiveQuadSignalRNotifier_QuadSelectionConfirmed;
+            this.activeQuadSignalRViewClient.RegisterView(
+                this);
+
+            this.activeQuadSignalRViewClient.RegisterActiveQuadUpdateHandler(this, this.ActiveQuadSignalRNotifier_ActiveQuads); 
+            this.activeQuadSignalRViewClient.RegisterConfirmedhandler(this, this.ActiveQuadSignalRNotifier_QuadSelectionConfirmed);
         }
 
         protected override void ConfigureView()
@@ -69,20 +73,48 @@
         private void ConfirmQuadSelection()
         {
             //Send selction request to Quad SignalR server to confirm still free
-            this.activeQuadSignalRNotifier.ConfirmQuadSelection(this.userSelectedQuad);
+            var result = this.activeQuadSignalRViewClient.ConfirmQuadSelection(this,this.userSelectedQuad);
 
-            this.waitingSelectedQuadConfirmation = true;
-        }
-
-        private void ActiveQuadSignalRNotifier_QuadSelectionConfirmed(object sender, QuadSelectionConfirmedEventArgs args)
-        {
-            if (args.TheQuad.QuadId == this.userSelectedQuad.QuadId && args.Confirmed)
+            switch (result)
             {
-                
+                case RequestQuadConfirmation.QuadAlreadyPending:
+                    {
+                        this.Notifications.text = "Quad Pending confirmation please select another";
+                        this.Notifications.gameObject.SetActive(true);
+                        this.ConfirmSelection.interactable = true;
+                        this.waitingSelectedQuadConfirmation = false;
+                        break;
+                    }
+                case RequestQuadConfirmation.RequestSent:
+                    {
+                        //Disable confirm selection button whilst processing the confirmation request.
+                        this.ConfirmSelection.interactable = false;
+                        this.waitingSelectedQuadConfirmation = true;
+                        this.Notifications.text = string.Empty;
+                        this.Notifications.gameObject.SetActive(false);
+                        break;
+                    }
             }
         }
 
-        private void ActiveQuadSignalRNotifier_ActiveQuads(object sender, ActiveQuadsUpdateEventArgs e)
+        private void ActiveQuadSignalRNotifier_QuadSelectionConfirmed(SignalR.Container_EventsCallbacks.ActiveQuadContainer.QuadSelectionConfirmed args)
+        {
+            if (args.TheQuad.QuadId == this.userSelectedQuad.QuadId && args.Confirmed)
+            {
+                this.Notifications.text = "Quad selection confirmed.";
+                this.Notifications.gameObject.SetActive(true);
+                this.OkView.interactable = true;
+            }
+            else
+            {
+                this.Notifications.text = "Quad in use please select another.";
+                this.Notifications.gameObject.SetActive(true);
+                this.OkView.interactable = false;
+            }
+            
+        }
+
+        private void ActiveQuadSignalRNotifier_ActiveQuads(ActiveQuadsUpdate e)
         {
             if (e.ActiveQuads.Any())
             {
@@ -136,11 +168,6 @@
 
         void Update()
         {
-            if (this.waitingSelectedQuadConfirmation)
-            {
-
-            }
-
             if (this.activeQuads.Any())
             {
                 this.SelectQuad.interactable = true;

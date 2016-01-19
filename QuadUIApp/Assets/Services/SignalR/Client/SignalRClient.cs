@@ -1,13 +1,12 @@
-﻿using Assets.Services.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Exceptions.SignalRClientExceptions;
 using UnityEngine;
-using Assets.Services.SignalR.MsgParser.jsonParser;
 using Assets.Services.SignalR.MsgParser.JsonParser;
 using Assets.Services.SignalR.MsgParser;
 using Assets.Services.Models;
+using Assets.Services.SignalR.Interfaces;
 
 namespace Assets.Services.SignalR.Client
 {
@@ -143,9 +142,6 @@ namespace Assets.Services.SignalR.Client
 
                             //Extract the client method content.
                             this.clientMethodTypeMapping[methodName].ParseHubToClientMsg(msg.Msg);
-
-
-                            //var parameters = this.paramsToClass.Convert(clientMethodContent.ClientMethodParameters, this.clientMethodTypeMapping[clientMethodContent.ClientMethodName]);
 
                             this.hubMethodCallBacks[methodName].ForEach(callback =>
                             {

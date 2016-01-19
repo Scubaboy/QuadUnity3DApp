@@ -1,13 +1,18 @@
-﻿using Assets.Services.ViewSystem.View.Controller;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Assets.MonoBehaviour_Extensions.ViewSystem.Views.Fixed.Status_Feeds
+﻿namespace Assets.MonoBehaviour_Extensions.ViewSystem.Views.Fixed.Status_Feeds
 {
-    public class StatusFeedsView : BaseViewController
+    using Interfaces;
+    using Services.ViewSystem.View.Controller;
+    using System;
+    using System.Text;
+
+    public class StatusFeedsView : BaseViewController , IStatusFeedNotify
     {
+        
+        public void PostNotification(string notification, NotificationType severety)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void ConfigureView()
         {
             

@@ -1,9 +1,6 @@
-﻿using Assets.Services.Interfaces;
+﻿using Assets.Services.SignalR.Interfaces;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Assets.Services.SignalR.MsgToClass
 {

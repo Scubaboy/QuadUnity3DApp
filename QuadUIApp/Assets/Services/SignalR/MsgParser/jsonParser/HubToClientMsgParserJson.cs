@@ -1,7 +1,6 @@
-﻿using System;
-using Assets.Services.Interfaces;
-using Assets.Services.SignalR.MsgParser.jsonParser;
+﻿using Assets.Services.SignalR.MsgParser.jsonParser;
 using Newtonsoft.Json;
+using Assets.Services.SignalR.Interfaces;
 
 namespace Assets.Services.SignalR.MsgParser.JsonParser
 {

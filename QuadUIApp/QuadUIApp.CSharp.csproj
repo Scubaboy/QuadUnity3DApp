@@ -59,12 +59,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -84,12 +78,17 @@
   <ItemGroup>
     <Compile Include="Assets\Exceptions\SignalRClientExceptions\SignalRClientMethodRegisterUnknownException.cs" />
     <Compile Include="Assets\Exceptions\SignalRClientExceptions\SignalRClientUnsupportedSendMsgTypeException.cs" />
-    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Clients\ActiveQuadSignalRClient.cs" />
-    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container Events\ActiveQuadContainer\ActiveQuadsUpdateEventArgs.cs" />
-    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container Events\ActiveQuadContainer\QuadSelectionConfirmedEventArgs.cs" />
-    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container Interfaces\SignalRClientContainers\ISignalRActiveQuadContainer.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Clients\ActiveQuads\ActiveQuadsClientTypes.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Clients\ActiveQuads\ActiveQuadSignalRClient.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Clients\ActiveQuads\Interfaces\ISignalRClientViewRegistration.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container EventsCallbacks\ActiveQuadContainer\ActiveQuadsUpdate.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Container EventsCallbacks\ActiveQuadContainer\QuadSelectionConfirmed.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Clients\ActiveQuads\Interfaces\ISignalRActiveQuadViewAccess.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRClientController.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Controllers\SignalRHubConnController.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Exceptions\QuadAlreadyWaitingSelectionConfirmationException.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Exceptions\ViewAlreadyRegisteredException.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Exceptions\ViewNotRegisteredException.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\SignalR\Factories\Transport\Factory\SignalRTransportFactory.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\ModeControl\ModeController.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\ModeViewController\ModeViewCtrl.cs" />
@@ -97,6 +96,8 @@
     <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Dynamic\Initialise\InitialiseView.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Dynamic\Select\SelectActiveQuadView.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Fixed\Menu\MenuView.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Fixed\Status Feeds\Interfaces\IStatusFeedNotify.cs" />
+    <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Fixed\Status Feeds\StatusFeedsTypes.cs" />
     <Compile Include="Assets\MonoBehaviour Extensions\ViewSystem\Views\Fixed\Status Feeds\StatusFeedsView.cs" />
     <Compile Include="Assets\Scripts\ActiveStateToggler.cs" />
     <Compile Include="Assets\Scripts\ApplicationManager.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Assets\Scripts\ScrollDetailTexture.cs" />
     <Compile Include="Assets\Scripts\ShowSliderValue.cs" />
     <Compile Include="Assets\Scripts\TiltWindow.cs" />
+    <Compile Include="Assets\Services\Configuration\Interfaces\Read\IConfigMissionPlanRead.cs" />
     <Compile Include="Assets\Services\Configuration\Interfaces\Read\IConfigSelectedQuadCaliRead.cs" />
     <Compile Include="Assets\Services\Configuration\Interfaces\Read\IConfigSelectedQuadConfigRead.cs" />
     <Compile Include="Assets\Services\Configuration\Interfaces\Read\IConfigSelectedQuadRead.cs" />
@@ -116,17 +118,17 @@
     <Compile Include="Assets\Services\Configuration\Interfaces\Write\IConfigSelectedQuadCaliWrite.cs" />
     <Compile Include="Assets\Services\Configuration\Interfaces\Write\IConfigSelectedQuadConfigWrite.cs" />
     <Compile Include="Assets\Services\Configuration\Interfaces\Write\IConfigSelectedQuadWrite.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRCallbackAction.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRClient.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRClientConnect.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRClientController.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRClientCtrl.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRClientParamToClass.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRHubConnCtrl.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRMsgParserJson.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRMsgParserString.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRTransportCtrl.cs" />
-    <Compile Include="Assets\Services\Interfaces\ISignalRTransportFactory.cs" />
+    <Compile Include="Assets\Services\SignalR\Interfaces\ISignalRCallbackAction.cs" />
+    <Compile Include="Assets\Services\SignalR\Interfaces\ISignalRClient.cs" />
+    <Compile Include="Assets\Services\SignalR\Interfaces\ISignalRClientConnect.cs" />
+    <Compile Include="Assets\Services\SignalR\Interfaces\ISignalRClientController.cs" />
+    <Compile Include="Assets\Services\SignalR\Interfaces\ISignalRClientCtrl.cs" />
+    <Compile Include="Assets\Services\SignalR\Interfaces\ISignalRClientParamToClass.cs" />
+    <Compile Include="Assets\Services\SignalR\Interfaces\ISignalRHubConnCtrl.cs" />
+    <Compile Include="Assets\Services\SignalR\Interfaces\ISignalRMsgParserJson.cs" />
+    <Compile Include="Assets\Services\SignalR\Interfaces\ISignalRMsgParserString.cs" />
+    <Compile Include="Assets\Services\SignalR\Interfaces\ISignalRTransportCtrl.cs" />
+    <Compile Include="Assets\Services\SignalR\Interfaces\ISignalRTransportFactory.cs" />
     <Compile Include="Assets\Services\Models\ActiveQuad.cs" />
     <Compile Include="Assets\Services\Models\ActiveQuads.cs" />
     <Compile Include="Assets\Services\Models\GPSLocation.cs" />
@@ -149,7 +151,6 @@
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\Parsers\WebSocketParser.cs" />
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\SignalRTransportWS.cs" />
     <Compile Include="Assets\Services\SignalR\Protocols\WebSockets\TransportProtocolTypes.cs" />
-    <Compile Include="Assets\Services\SignalR\SignalRService.cs" />
     <Compile Include="Assets\Services\ViewSystem\ModeControl\Controllers\ModeTrackingController.cs" />
     <Compile Include="Assets\Services\ViewSystem\ModeControl\Exceptions\UICtrlAlreadyRegisteredException.cs" />
     <Compile Include="Assets\Services\ViewSystem\ModeControl\Exceptions\UICtrlNotRegisteredException.cs" />
@@ -235,5 +236,6 @@
     <None Include="Assets\UnityTestTools\LICENSE.txt" />
     <None Include="Assets\UnityTestTools\changelog.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
