@@ -31,10 +31,15 @@
             this.activeQuadSignalRViewClient = FindObjectOfType<ActiveQuadSignalRClient>()
                 .GetComponent <ActiveQuadSignalRClient>() as ISignalRActiveQuadViewAccess;
 
+            
+        }
+
+        void Start()
+        {
             this.activeQuadSignalRViewClient.RegisterView(
                 this);
 
-            this.activeQuadSignalRViewClient.RegisterActiveQuadUpdateHandler(this, this.ActiveQuadSignalRNotifier_ActiveQuads); 
+            this.activeQuadSignalRViewClient.RegisterActiveQuadUpdateHandler(this, this.ActiveQuadSignalRNotifier_ActiveQuads);
             this.activeQuadSignalRViewClient.RegisterConfirmedhandler(this, this.ActiveQuadSignalRNotifier_QuadSelectionConfirmed);
         }
 
